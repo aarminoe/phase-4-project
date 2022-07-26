@@ -17,7 +17,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className='App-header'>
       
       {userLoggedIn ? 
       <div>

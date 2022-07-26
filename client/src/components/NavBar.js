@@ -6,8 +6,14 @@ function NavBar() {
 
     return (
        <div className="navbar">
-            <NavLink exact to='/' >Home</NavLink>
-            <NavLink exact to='/profile'>Profile</NavLink>
+            <NavLink 
+            className='navlink' 
+            exact to='/' 
+            activeStyle={{color: 'white'}}>Home</NavLink>
+            <NavLink 
+            className='navlink'
+            exact to='/profile' 
+            activeStyle={{color: 'white'}}>Profile</NavLink>
        </div> 
     )
 }
