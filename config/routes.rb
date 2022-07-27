@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
-  resources :users, :friends, :posts, :comments, :likes, :groups, :profiles
+  resources :users do
+    resources :groups
+    resources :profiles
+    resources :friends
+    resources :posts do
+      resources :comments
+      resources :likes
+    end
+  end
+
 
 
 
