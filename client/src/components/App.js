@@ -6,6 +6,11 @@ import NavBar from './NavBar';
 import Home from './Home';
 import Header from './Header';
 import Profile from './Profile';
+import Messages from './Messages';
+import Notifications from './Notifications';
+import Groups from './Groups';
+import Search from './Search';
+
 
 
 function App() {
@@ -32,6 +37,18 @@ function App() {
             </Route>
             <Route exact path='/profile'>
               <Profile />
+            </Route>
+            <Route exact path='/messages'>
+              <Messages />
+            </Route>
+            <Route exact path='/notifications'>
+              <Notifications />
+            </Route>
+            <Route exact path='/groups'>
+              <Groups />
+            </Route>
+            <Route exact path='/search'>
+              <Search />
             </Route>
           </Switch>
         </div>
