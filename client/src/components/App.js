@@ -1,5 +1,5 @@
 import '../App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import LogIn from './LogIn';
 import NavBar from './NavBar';
@@ -13,13 +13,27 @@ import Search from './Search';
 
 
 
+
 function App() {
 
   const [userLoggedIn, setUserLoggedIn] = useState(false)
+  const [userList, setUserList] = useState([])
 
   function handleUserLogIn(user) {
     setUserLoggedIn(true)
   }
+
+  function handleNewUser(createdUser) {
+    const updatedUserList = [...userList, createdUser]
+    setUserList(updatedUserList)
+    console.log(createdUser)
+  }
+
+  useEffect(() => {
+    fetch('/users')
+    .then(resp => resp.json())
+    .then(users => setUserList(users))
+  },[])
 
   return (
     <div className='App-header'>
@@ -50,12 +64,13 @@ function App() {
             <Route exact path='/search'>
               <Search />
             </Route>
+            
           </Switch>
         </div>
       </div>  
       : 
       <div>
-        <LogIn onHandleUserLogIn={handleUserLogIn} />
+        <LogIn onHandleUserLogIn={handleUserLogIn} userList={userList} onHandleNewUser={handleNewUser}/>
       </div> }
     </div>
   );

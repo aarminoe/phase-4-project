@@ -38,3 +38,8 @@
 .navlink {
   color: red
 }
+
+.signup-errors {
+  font-size: small;
+  color: red;
+}
