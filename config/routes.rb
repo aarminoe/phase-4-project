@@ -4,8 +4,10 @@ Rails.application.routes.draw do
     resources :profiles
     resources :friends
     resources :posts do
-      resources :comments
-      resources :likes
+      resources :post_likes
+      resources :comments do 
+        resources :comment_likes
+      end
     end
   end
 

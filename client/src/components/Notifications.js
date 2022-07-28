@@ -1,4 +1,4 @@
-
+import Notification from "./Notification"
 
 function Notifications() {
     return (

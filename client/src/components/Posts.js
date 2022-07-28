@@ -1,4 +1,4 @@
-
+import Post from "./Post"
 
 function Posts() {
     return (

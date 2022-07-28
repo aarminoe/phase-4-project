@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+User.create(name: 'test', password: '123', password_confirmation:'123')
+Post.create(post: 'hi', user_id: 1)
+Comment.create(comment: 'hello', post_id: 1)
+PostLike.create(user_who_liked: 'Jimmy', post_id:1)
+CommentLike.create(user_who_liked: 'Jimmy', comment_id:1)

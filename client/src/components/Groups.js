@@ -1,4 +1,4 @@
-
+import Group from "./Group"
 
 function Groups() {
     return( 
