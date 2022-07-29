@@ -1,6 +1,6 @@
 
 
-function Search() {
+function Search({userList}) {
     return (
         <div>
             Search

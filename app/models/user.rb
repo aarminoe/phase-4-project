@@ -8,7 +8,7 @@ class User < ApplicationRecord
     has_one :profile, dependent: :destroy
     has_secure_password
 
-    validates :name, uniqueness: true, presence: true
+    validates :name, uniqueness: true, presence: true, length: {within: 3..24}
     validates :password, presence: :true, confirmation: true, length: {within: 8..24}
 
 end

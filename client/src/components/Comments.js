@@ -1,9 +1,11 @@
 import Comment from "./Comment"
 
-function Comments() {
+function Comments({post}) {
     return (
         <div>
-            Comments
+            {post.comments.map((comment) => {
+                return <Comment comment={comment} />
+            })}
         </div>
     )
 }

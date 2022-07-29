@@ -22,9 +22,8 @@ function LogIn({onHandleUserLogIn, userList, onHandleNewUser}) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    console.log(user)
-    console.log(pass)
     onHandleUserLogIn(user)
+    console.log(userList)
   }
 
   function handleNewUserSubmit(e) {

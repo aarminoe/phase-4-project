@@ -1,10 +1,10 @@
 import Comments from "./Comments";
 
-function Post() {
+function Post({post}) {
     return (
         <div>
             Post
-            <Comments />
+            <Comments post={post}/>
         </div>
     )
 }

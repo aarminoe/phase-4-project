@@ -2,12 +2,14 @@ import React from "react";
 import Posts from "./Posts";
 
 
-function Home() {
+function Home({userList}) {
+
     return(
         <div>
             <div>
-              <Posts />
-
+                {userList.map((user) => {
+                    return  <Posts user={user} />
+                })}
             </div>
         </div>
     )

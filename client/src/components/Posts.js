@@ -1,9 +1,11 @@
 import Post from "./Post"
 
-function Posts() {
+function Posts({user}) {
     return (
         <div>
-            Posts
+            {user.posts.map((post) => {
+                return <Post post={post} />
+            })}
         </div>
     )
 }

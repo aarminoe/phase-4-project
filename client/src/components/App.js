@@ -17,7 +17,8 @@ import Search from './Search';
 function App() {
 
   const [userLoggedIn, setUserLoggedIn] = useState(false)
-  const [userList, setUserList] = useState([])
+  const [userList, setUserList] = useState(null)
+  const [loggedInUser, setLoggedInUser] = useState('')
 
   function handleUserLogIn(user) {
     setUserLoggedIn(true)
@@ -26,8 +27,17 @@ function App() {
   function handleNewUser(createdUser) {
     const updatedUserList = [...userList, createdUser]
     setUserList(updatedUserList)
-    console.log(createdUser)
   }
+
+  useEffect(() => {
+    fetch('/auth')
+    .then(res => {
+      if(res.ok){
+        res.json().then(user => setLoggedInUser(user))
+      }
+    })
+  }, [])
+
 
   useEffect(() => {
     fetch('/users')
@@ -47,22 +57,22 @@ function App() {
         <div>
           <Switch>
             <Route exact path='/'>
-              <Home />
+              <Home userList={userList}/>
             </Route>
             <Route exact path='/profile'>
               <Profile />
             </Route>
             <Route exact path='/messages'>
-              <Messages />
+              <Messages userList={userList}/>
             </Route>
             <Route exact path='/notifications'>
-              <Notifications />
+              <Notifications userList={userList}/>
             </Route>
             <Route exact path='/groups'>
-              <Groups />
+              <Groups userList={userList}/>
             </Route>
             <Route exact path='/search'>
-              <Search />
+              <Search userList={userList}/>
             </Route>
             
           </Switch>

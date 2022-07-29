@@ -14,10 +14,15 @@ class UsersController < ApplicationController
         end
     end
 
+    def show
+        current_user = User.find(session[:user_id])
+        render json: current_user 
+    end
+
 
     private
 
     def user_params
-        params.permit(:name, :password, :password_confirmation)
+        params.permit(:name, :password, :password_confirmation, :logged_in)
     end
 end
