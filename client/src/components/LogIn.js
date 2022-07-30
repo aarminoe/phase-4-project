@@ -33,7 +33,7 @@ function LogIn({onHandleUserLogIn, userList, onHandleNewUser, setLoggedInUser}) 
     })
     .then((r) => {
       if (r.ok) {
-        r.json().then((data) => console.log(data))
+        r.json().then((data) => setLoggedInUser(data))
       } else {
         r.json().then((err) => console.log(err.errors))
       }
@@ -42,9 +42,6 @@ function LogIn({onHandleUserLogIn, userList, onHandleNewUser, setLoggedInUser}) 
 
   function handleNewUserSubmit(e) {
     e.preventDefault()
-    console.log(newUser)
-    console.log(newPass)
-    console.log(confirmPass)
     fetch('/users', {
       method: 'POST',
       headers: {

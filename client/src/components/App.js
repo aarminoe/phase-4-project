@@ -17,8 +17,8 @@ import Search from './Search';
 function App() {
 
   const [userLoggedIn, setUserLoggedIn] = useState(false)
-  const [userList, setUserList] = useState(null)
-  const [loggedInUser, setLoggedInUser] = useState('')
+  const [userList, setUserList] = useState([])
+  const [loggedInUser, setLoggedInUser] = useState(null)
 
   function handleUserLogIn(user) {
     setUserLoggedIn(true)
@@ -31,13 +31,15 @@ function App() {
   }
 
   useEffect(() => {
-    fetch('/auth')
+    fetch('/me')
     .then(res => {
       if(res.ok){
-        res.json().then(user => console.log(user))
+        res.json().then(user => setLoggedInUser(user))
       }
     })
   }, [])
+
+
 
 
   useEffect(() => {
@@ -46,45 +48,50 @@ function App() {
     .then(users => setUserList(users))
   },[])
 
-  return (
-    <div className='App-header'>
-      
-      {userLoggedIn ? 
-      <div>
-        <header>
-          <Header />
-          <NavBar />
-        </header>
+  if (loggedInUser) {
+    return (
+      <div className='App-header'>
         <div>
-          <Switch>
-            <Route exact path='/'>
-              <Home userList={userList}/>
-            </Route>
-            <Route exact path='/profile'>
-              <Profile />
-            </Route>
-            <Route exact path='/messages'>
-              <Messages userList={userList} loggedInUser={loggedInUser}/>
-            </Route>
-            <Route exact path='/notifications'>
-              <Notifications userList={userList}/>
-            </Route>
-            <Route exact path='/groups'>
-              <Groups userList={userList}/>
-            </Route>
-            <Route exact path='/search'>
-              <Search userList={userList}/>
-            </Route>
-            
-          </Switch>
-        </div>
-      </div>  
-      : 
-      <div>
-        <LogIn onHandleUserLogIn={handleUserLogIn} userList={userList} onHandleNewUser={handleNewUser} setLoggedInUser={setLoggedInUser}/>
-      </div> }
-    </div>
-  );
+          <header>
+            <Header />
+            <NavBar />
+          </header>
+          <div>
+            <Switch>
+              <Route exact path='/'>
+                <Home userList={userList} loggedInUser={loggedInUser}/>
+              </Route>
+              <Route exact path='/profile'>
+                <Profile />
+              </Route>
+              <Route exact path='/messages'>
+                <Messages userList={userList} loggedInUser={loggedInUser}/>
+              </Route>
+              <Route exact path='/notifications'>
+                <Notifications userList={userList}/>
+              </Route>
+              <Route exact path='/groups'>
+                <Groups userList={userList}/>
+              </Route>
+              <Route exact path='/search'>
+                <Search userList={userList}/>
+              </Route>
+              
+            </Switch>
+          </div>
+        </div>   
+
+      </div>
+    );
+    
+  }
+  else {
+      return(
+    <div>
+    <LogIn onHandleUserLogIn={handleUserLogIn} userList={userList} onHandleNewUser={handleNewUser} setLoggedInUser={setLoggedInUser}/>
+  </div> 
+      )
+  }
 }
 
 export default App;

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   post "/log", to: "sessions#create"
-  get '/auth', to: 'users#show'
+  get "/me", to: "users#show"
   
   
   resources :users do

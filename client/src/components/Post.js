@@ -3,8 +3,6 @@ import React, {useState} from "react";
 
 function Post({post, user}) {
 
-    console.log(post)
-    console.log(user)
     return (
         <div className="post-card">
             <p>{user.username} posted:</p>
