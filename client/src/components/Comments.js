@@ -1,11 +1,11 @@
 import Comment from "./Comment"
 
-function Comments({post}) {
+function Comments({post, user}) {
     return (
-        <div>
-            {post.comments.map((comment) => {
-                return <Comment comment={comment} />
-            })}
+        <div className="comments-card">
+            {post.comments ? post.comments.map((comment) => {
+                return <Comment comment={comment} user={user} />
+            }):null}
         </div>
     )
 }

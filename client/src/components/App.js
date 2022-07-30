@@ -33,7 +33,7 @@ function App() {
     fetch('/auth')
     .then(res => {
       if(res.ok){
-        res.json().then(user => setLoggedInUser(user))
+        res.json().then(user => console.log(user))
       }
     })
   }, [])
@@ -80,7 +80,7 @@ function App() {
       </div>  
       : 
       <div>
-        <LogIn onHandleUserLogIn={handleUserLogIn} userList={userList} onHandleNewUser={handleNewUser}/>
+        <LogIn onHandleUserLogIn={handleUserLogIn} userList={userList} onHandleNewUser={handleNewUser} setLoggedInUser={setLoggedInUser}/>
       </div> }
     </div>
   );

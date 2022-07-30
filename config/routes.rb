@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  
+  post "/log", to: "sessions#create"
+  get '/auth', to: 'users#show'
+  
+  
   resources :users do
     resources :groups
     resources :profiles
@@ -10,9 +15,6 @@ Rails.application.routes.draw do
       end
     end
   end
-
-
-
 
 
 

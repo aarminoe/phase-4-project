@@ -1,9 +1,10 @@
 
 
-function Comment() {
+function Comment({comment, user}) {
     return(
-        <div>
-            Comment
+        <div className="comment">
+            <p>{user.username} commented:</p>
+            Comment {comment.comment}
         </div>
     )
 }

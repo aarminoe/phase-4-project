@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import { NavLink } from "react-router-dom";
 import { Route, Switch } from "react-router-dom";
 
-function LogIn({onHandleUserLogIn, userList, onHandleNewUser}) {
+function LogIn({onHandleUserLogIn, userList, onHandleNewUser, setLoggedInUser}) {
 
     
   const [user, setUser] = useState('')
@@ -13,8 +13,6 @@ function LogIn({onHandleUserLogIn, userList, onHandleNewUser}) {
   const [confirmPass, setConfirmPass] = useState('')
   const [userLoggedIn, setUserLoggedIn] = useState(false)
   const [signUp, setSignUp] = useState(false)
-  const [sameNameError, setSameNameError] = useState(false)
-  const [passLengthError, setPassLengthError] = useState(false)
   const [errorsFound, setErrorsFound] = useState(false)
   const [errorList, setErrorList] = useState([])
   
@@ -22,8 +20,26 @@ function LogIn({onHandleUserLogIn, userList, onHandleNewUser}) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    onHandleUserLogIn(user)
-    console.log(userList)
+    onHandleUserLogIn()
+    console.log(user)
+    console.log(pass)
+    fetch('/log', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: user,
+        password: pass
+      })
+    })
+    .then((r) => {
+      if (r.ok) {
+        r.json().then((data) => console.log(data))
+      } else {
+        r.json().then((err) => console.log(err.errors))
+      }
+    })
   }
 
   function handleNewUserSubmit(e) {
@@ -37,7 +53,7 @@ function LogIn({onHandleUserLogIn, userList, onHandleNewUser}) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: newUser,
+        username: newUser,
         password: newPass,
         password_confirmation: confirmPass
       })
@@ -53,19 +69,7 @@ function LogIn({onHandleUserLogIn, userList, onHandleNewUser}) {
     })   
   }
 
-  function handleErrors() {
-    userList.forEach(user => {
-      if (newUser === user.name) {
-        setSameNameError(true)
-      }
-      else {
-        setSameNameError(false)
-      }
-    })
-    if (newPass.length < 8 || newPass.length > 24) {
-      setPassLengthError(true)
-    }
-  }
+ 
 
     return (
     <header>
@@ -83,7 +87,7 @@ function LogIn({onHandleUserLogIn, userList, onHandleNewUser}) {
               <p>Confirm Password:</p>
               <input type='password' onChange={(e) => setConfirmPass(e.target.value)}></input>
               <p></p>
-              <button onClick={handleErrors}>Sign up!</button>
+              <button>Sign up!</button>
             </form>
             <div>
               {errorsFound ? errorList.map((e) => {
@@ -99,7 +103,7 @@ function LogIn({onHandleUserLogIn, userList, onHandleNewUser}) {
         </div> 
         :
           <div>
-            <form>
+            <form onSubmit={handleSubmit}>
               <p>
                 Log In
               </p>
@@ -112,7 +116,7 @@ function LogIn({onHandleUserLogIn, userList, onHandleNewUser}) {
               </p>
               <input onChange={(e) => setPass(e.target.value)} type='text' />
               <p>
-                <button onClick={handleSubmit}>Log In!</button>
+                <button >Log In!</button>
               </p>
               <p>
                 Don't have an account?

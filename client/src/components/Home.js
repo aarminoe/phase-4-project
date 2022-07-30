@@ -7,9 +7,9 @@ function Home({userList}) {
     return(
         <div>
             <div>
-                {userList.map((user) => {
+                {userList ? userList.map((user) => {
                     return  <Posts user={user} />
-                })}
+                }):null}
             </div>
         </div>
     )
