@@ -1,6 +1,8 @@
 import Message from "./Message"
 
-function Messages() {
+function Messages({loggedInUser}) {
+
+    console.log(loggedInUser)
     return(
         <div>
             Messages

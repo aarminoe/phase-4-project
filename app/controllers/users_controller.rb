@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     
     def index
         users = User.all 
-        render json: users, include: ['profile', 'friends', 'groups', 'posts', 'posts.comments', 'posts.post_likes', 'posts.comments.comment_likes']
+        render json: users, include: ['profile', 'friends', 'groups', 'posts', 'posts.comments', 'posts.post_likes', 'posts.comments.comment_likes', 'messages']
     end
 
     def create 

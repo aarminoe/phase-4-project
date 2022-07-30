@@ -22,6 +22,7 @@ function App() {
 
   function handleUserLogIn(user) {
     setUserLoggedIn(true)
+    setLoggedInUser(user)
   }
 
   function handleNewUser(createdUser) {
@@ -63,7 +64,7 @@ function App() {
               <Profile />
             </Route>
             <Route exact path='/messages'>
-              <Messages userList={userList}/>
+              <Messages userList={userList} loggedInUser={loggedInUser}/>
             </Route>
             <Route exact path='/notifications'>
               <Notifications userList={userList}/>

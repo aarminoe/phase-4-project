@@ -21,8 +21,6 @@ function LogIn({onHandleUserLogIn, userList, onHandleNewUser, setLoggedInUser}) 
   function handleSubmit(e) {
     e.preventDefault()
     onHandleUserLogIn()
-    console.log(user)
-    console.log(pass)
     fetch('/log', {
       method: 'POST',
       headers: {

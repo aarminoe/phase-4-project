@@ -5,6 +5,7 @@ class User < ApplicationRecord
     has_many :groups, dependent: :destroy
     has_many :comments, through: :posts, dependent: :destroy
     has_many :comment_likes, through: :comments, dependent: :destroy
+    has_many :messages, dependent: :destroy
     has_one :profile, dependent: :destroy
     has_secure_password
 
