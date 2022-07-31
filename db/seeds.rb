@@ -1,18 +1,12 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-User.create(username: 'test', password: '12345678', password_confirmation:'12345678')
-User.create(username: 'Aaron', password: '12345678', password_confirmation: '12345678')
-User.create(username: 'tester', password: '12345678', password_confirmation: '12345678')
-User.create(username: 'tester2', password: '12345678', password_confirmation: '12345678')
-User.create(username: 'Aaron2', password: '12345678', password_confirmation: '12345678')
-User.create(username: 'Aaron3', password: '12345678', password_confirmation: '12345678')
-User.create(username: 'noone', password: '12345678', password_confirmation: '12345678')
-User.create(username: 'nooneagain', password: '12345678', password_confirmation: '12345678')
+require 'faker'
+
+
+
+User.create(username: 'test', password: '12345678', password_confirmation:'12345678', avatar_url: 'https://media.istockphoto.com/photos/businessman-silhouette-as-avatar-or-default-profile-picture-picture-id476085198?b=1&k=20&m=476085198&s=170667a&w=0&h=Ct4e1kIOdCOrEgvsQg4A1qeuQv944pPFORUQcaGw4oI=')
+User.create(username: 'Aaron', password: '12345678', password_confirmation: '12345678', avatar_url: 'https://media.istockphoto.com/photos/businessman-silhouette-as-avatar-or-default-profile-picture-picture-id476085198?b=1&k=20&m=476085198&s=170667a&w=0&h=Ct4e1kIOdCOrEgvsQg4A1qeuQv944pPFORUQcaGw4oI=')
+50.times do 
+    User.create!(username: Faker::Name.unique.first_name, password: '12345678', password_confirmation: '12345678', avatar_url: Faker::LoremFlickr.image)
+end
 Post.create(post: 'hi', user_id: 1)
 Post.create(post: 'Crazy night!', user_id: 2)
 Post.create(post: 'still postin123', user_id: 2)

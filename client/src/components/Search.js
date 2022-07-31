@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import SearchedUsers from "./SearchedUsers"
 
-function Search({userList}) {
+function Search({userList, loggedInUser}) {
 
     const [searchedUser, setSearchedUser] = useState('')
 
@@ -16,7 +16,7 @@ function Search({userList}) {
             Search
             <input type='text' onChange={handleSearch}></input>
             {searchedUser.length >= 1 ? userList.map((user) => {
-                return <SearchedUsers user={user} searchedUser={searchedUser}/>
+                return <SearchedUsers user={user} searchedUser={searchedUser} loggedInUser={loggedInUser}/>
             }) : null}
         </div>
     )

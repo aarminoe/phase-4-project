@@ -1,9 +1,10 @@
 import OneSearchedUser from "./OneSearchedUser"
 
-function SearchedUsers({user, setSearchedUserList, searchedUser}) {
+function SearchedUsers({user, loggedInUser, searchedUser}) {
     return (
         <div>
-            {user.username.toLowerCase().includes(searchedUser) ? <OneSearchedUser user={user} /> :null}
+            {user.username.toLowerCase().includes(searchedUser) ? <OneSearchedUser user={user} loggedInUser={loggedInUser}/> :null}
+            
         </div>
     )
 }

@@ -52,44 +52,55 @@ function App() {
   },[])
 
   if (loggedInUser) {
-    return (
-      <div className='App-header'>
-        <div>
-          <header>
-            <Header />
-            <NavBar needProfile={needProfile} />
-          </header>
+    if (loggedInUser.avatar_url) {
+      return (
+        <div className='App-header'>
           <div>
-            <Switch>
-              <Route exact path='/'>
-                {needProfile ? <Redirect to='/profile' /> : 
-                <Home userList={userList} loggedInUser={loggedInUser}/>}
-              </Route>
-              <Route exact path='/profile'>
-                <Profile />
-              </Route>
-              <Route exact path='/messages'>
-                <Messages userList={userList} loggedInUser={loggedInUser}/>
-              </Route>
-              <Route exact path='/notifications'>
-                <Notifications userList={userList}/>
-              </Route>
-              <Route exact path='/groups'>
-                <Groups userList={userList}/>
-              </Route>
-              <Route exact path='/search'>
-                <Search userList={userList}/>
-              </Route>
-              <Route exact path='/friends'>
-                <FriendsList userList={userList}/>
-              </Route>
-              
-            </Switch>
-          </div>
-        </div>   
+            <header>
+              <Header />
+              <NavBar needProfile={needProfile} />
+            </header>
+            <div>
+              <Switch>
+                <Route exact path='/'>
+                  {needProfile ? <Redirect to='/profile' /> : 
+                  <Home userList={userList} loggedInUser={loggedInUser}/>}
+                </Route>
+                <Route exact path='/profile'>
+                  <Profile loggedInUser={loggedInUser}/>
+                </Route>
+                <Route exact path='/messages'>
+                  <Messages userList={userList} loggedInUser={loggedInUser}/>
+                </Route>
+                <Route exact path='/notifications'>
+                  <Notifications userList={userList}/>
+                </Route>
+                <Route exact path='/groups'>
+                  <Groups userList={userList}/>
+                </Route>
+                <Route exact path='/search'>
+                  <Search userList={userList} loggedInUser={loggedInUser}/>
+                </Route>
+                <Route exact path='/friends'>
+                  <FriendsList userList={userList}/>
+                </Route>
+                
+              </Switch>
+            </div>
+          </div>   
+  
+        </div>
+      );
 
-      </div>
-    );
+
+    }
+    else {
+      return (
+        <div>
+          <Profile loggedInUser ={loggedInUser}/>
+        </div>
+      )
+    }
     
   }
   else {
