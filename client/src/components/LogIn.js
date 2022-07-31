@@ -1,9 +1,11 @@
 import React, { useState } from "react"
 
 import { NavLink } from "react-router-dom";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
+import Profile from "./Profile";
+import { Link } from "react-router-dom";
 
-function LogIn({onHandleUserLogIn, userList, onHandleNewUser, setLoggedInUser}) {
+function LogIn({onHandleUserLogIn, setNeedProfile, onHandleNewUser, setLoggedInUser, loggedInUser}) {
 
     
   const [user, setUser] = useState('')
@@ -11,7 +13,7 @@ function LogIn({onHandleUserLogIn, userList, onHandleNewUser, setLoggedInUser}) 
   const [newUser, setNewUser] = useState('')
   const [newPass, setNewPass] = useState('')
   const [confirmPass, setConfirmPass] = useState('')
-  const [userLoggedIn, setUserLoggedIn] = useState(false)
+  const [logInError, setLogInError] = useState(false)
   const [signUp, setSignUp] = useState(false)
   const [errorsFound, setErrorsFound] = useState(false)
   const [errorList, setErrorList] = useState([])
@@ -42,6 +44,8 @@ function LogIn({onHandleUserLogIn, userList, onHandleNewUser, setLoggedInUser}) 
 
   function handleNewUserSubmit(e) {
     e.preventDefault()
+    setSignUp(false)
+    toCreateProfile()
     fetch('/users', {
       method: 'POST',
       headers: {
@@ -56,12 +60,24 @@ function LogIn({onHandleUserLogIn, userList, onHandleNewUser, setLoggedInUser}) 
     .then(resp => resp.json())
     .then(createdUser => {
       onHandleNewUser(createdUser)
+      setLoggedInUser(createdUser)
+      setNeedProfile(true)
       console.log(createdUser.errors)
       if (createdUser.errors) {
         setErrorsFound(true)
         setErrorList(createdUser.errors)
       }
     })   
+  }
+
+  function toCreateProfile() {
+    return <Redirect to='/profile' />
+  }
+
+  function handleLogInError() {
+    if (!loggedInUser) {
+      setLogInError(true)
+    }
   }
 
  
@@ -90,11 +106,11 @@ function LogIn({onHandleUserLogIn, userList, onHandleNewUser, setLoggedInUser}) 
               }) : null}
             </div>
           </div>
-          <NavLink
+          <Link
           onClick={() => {setSignUp(false)}}
           className='navlink'
           exact to='/'
-          activeStyle={{color: 'white'}}>Back to Log in</NavLink>
+          activeStyle={{color: 'white'}}>Back to Log in</Link>
         </div> 
         :
           <div>
@@ -111,16 +127,17 @@ function LogIn({onHandleUserLogIn, userList, onHandleNewUser, setLoggedInUser}) 
               </p>
               <input onChange={(e) => setPass(e.target.value)} type='text' />
               <p>
-                <button >Log In!</button>
+                <button onClick={handleLogInError}>Log In!</button>
               </p>
+              {logInError ? <p>Username/Password not found.</p> : null}
               <p>
                 Don't have an account?
                 <p>
-                  <NavLink 
+                  <Link 
                   onClick={() => {setSignUp(true)}}
                   className='navlink'
-                  exact to='/signup' 
-                  activeStyle={{color: 'white'}}>Sign up!</NavLink>
+                  exact to='/' 
+                  activeStyle={{color: 'white'}}>Sign up!</Link>
                 </p>
               </p>
             </form>

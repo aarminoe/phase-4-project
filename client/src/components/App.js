@@ -1,6 +1,6 @@
 import '../App.css';
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import LogIn from './LogIn';
 import NavBar from './NavBar';
 import Home from './Home';
@@ -10,6 +10,7 @@ import Messages from './Messages';
 import Notifications from './Notifications';
 import Groups from './Groups';
 import Search from './Search';
+import FriendsList from './FriendsList';
 
 
 
@@ -19,6 +20,7 @@ function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(false)
   const [userList, setUserList] = useState([])
   const [loggedInUser, setLoggedInUser] = useState(null)
+  const [needProfile, setNeedProfile] = useState(false)
 
   function handleUserLogIn(user) {
     setUserLoggedIn(true)
@@ -38,7 +40,8 @@ function App() {
       }
     })
   }, [])
-
+  
+  console.log(loggedInUser)
 
 
 
@@ -54,12 +57,13 @@ function App() {
         <div>
           <header>
             <Header />
-            <NavBar />
+            <NavBar needProfile={needProfile} />
           </header>
           <div>
             <Switch>
               <Route exact path='/'>
-                <Home userList={userList} loggedInUser={loggedInUser}/>
+                {needProfile ? <Redirect to='/profile' /> : 
+                <Home userList={userList} loggedInUser={loggedInUser}/>}
               </Route>
               <Route exact path='/profile'>
                 <Profile />
@@ -76,6 +80,9 @@ function App() {
               <Route exact path='/search'>
                 <Search userList={userList}/>
               </Route>
+              <Route exact path='/friends'>
+                <FriendsList userList={userList}/>
+              </Route>
               
             </Switch>
           </div>
@@ -88,7 +95,7 @@ function App() {
   else {
       return(
     <div>
-    <LogIn onHandleUserLogIn={handleUserLogIn} userList={userList} onHandleNewUser={handleNewUser} setLoggedInUser={setLoggedInUser}/>
+    <LogIn setNeedProfile={setNeedProfile} onHandleUserLogIn={handleUserLogIn} userList={userList} onHandleNewUser={handleNewUser} setLoggedInUser={setLoggedInUser} loggedInUser={loggedInUser}/>
   </div> 
       )
   }

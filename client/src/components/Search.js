@@ -7,7 +7,7 @@ function Search({userList}) {
 
 
     function handleSearch(e) {
-        setSearchedUser(e.target.value)
+        setSearchedUser(e.target.value.toLowerCase())
     }
 
  
