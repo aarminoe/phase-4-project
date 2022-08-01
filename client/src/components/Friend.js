@@ -10,8 +10,8 @@ function Friend({friend,userList}) {
     console.log(userList)
     return (
         <div>
-            <img src={friend.avatar_url}>{friend.avatar_url}</img>
-            {friend.username}
+            <img className="avatar" src={friend.avatar_url}></img>
+            <p>{friend.username}</p>
             <p>{friend.bio}</p>
         </div>
     )
