@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Friend from "./Friend"
+
 
 function Profile({loggedInUser}) {
 
@@ -30,9 +30,6 @@ function Profile({loggedInUser}) {
                 <div>
                     {loggedInUser.bio}
                 </div>
-                <div>{loggedInUser.friends.map((friend) => {
-                    return <Friend friend={friend} />
-                })}</div>
             </div>
         </div>
         }

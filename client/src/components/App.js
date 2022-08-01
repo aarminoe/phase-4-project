@@ -82,7 +82,7 @@ function App() {
                   <Search userList={userList} loggedInUser={loggedInUser}/>
                 </Route>
                 <Route exact path='/friends'>
-                  <FriendsList userList={userList}/>
+                  <FriendsList userList={userList} loggedInUser={loggedInUser}/>
                 </Route>
                 
               </Switch>

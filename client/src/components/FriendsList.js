@@ -1,9 +1,14 @@
+import React, { useState } from "react"
+import Friend from "./Friend"
 
+function FriendsList({loggedInUser, userList}) {
 
-function FriendsList() {
+    
     return (
         <div>
-            Friends
+            {loggedInUser.friends.map((friend) => {
+                return <Friend friend={friend} />
+            })}
         </div>
     )
 }

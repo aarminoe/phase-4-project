@@ -13,7 +13,7 @@ class FriendsController < ApplicationController
     private
 
     def friend_params
-        params.permit(:username, :user_id)
+        params.permit(:username, :user_id, :bio, :avatar_url)
     end
 
 end

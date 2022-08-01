@@ -28,3 +28,9 @@
 .who-liked {
   font-size: small;
 }
+
+.avatar {
+  margin-top: 50px;
+  border-radius: 50%;
+  width: 100px;
+}
