@@ -4,7 +4,9 @@ function Messages({loggedInUser}) {
 
     return(
         <div>
-            Messages
+            {loggedInUser.messages.map((message) => {
+                return <Message message={message} loggedInUser={loggedInUser}/>
+            })}
         </div>
     )
 }

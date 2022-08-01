@@ -1,6 +1,7 @@
 import React, { useState } from "react"
+import { NavLink } from "react-router-dom"
 
-function OneSearchedUser({user, loggedInUser}) {
+function OneSearchedUser({user, loggedInUser, onToOtherProfile}) {
 
     const [friendAdded, setFriendAdded] = useState(false)
     const [userFriendsList, setUserFriendsList] = useState([])
@@ -42,7 +43,7 @@ function OneSearchedUser({user, loggedInUser}) {
             {loggedInUser.username == user.username ? null : 
             <div>
                 <img className="avatar" src={user.avatar_url}></img>
-                <p onClick={goToProfile}>{user.username}</p>
+                <NavLink onClick={() => onToOtherProfile(user)} exact to='/other-user-profile' >{user.username}</NavLink>
                 <p>{user.bio}</p>
                 <button onClick={handleAddFriend}>Add friend</button>              
             </div>  }    

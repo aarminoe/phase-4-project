@@ -5,6 +5,8 @@ import FriendsList from "./FriendsList"
 function Profile({loggedInUser, userList}) {
 
     const [pictureFile, setPictureFile] = useState(null)
+    const [seeFriends, setSeeFriends] = useState(false)
+    const [newBio, setNewBio] = useState('')
 
 
     function handlePictureFile(e) {
@@ -12,29 +14,42 @@ function Profile({loggedInUser, userList}) {
         console.log(e.target.value)
     }
 
+    function handleNewBio(e) {
+        e.preventDefault()
+        console.log(newBio)
+        fetch(`/users/${loggedInUser.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                bio: newBio
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => console.log(data))
+    }
+
+    function handleSeeFriends() {
+        setSeeFriends((seeFriends) => !seeFriends)
+    }
+
     return(
         <div>
-        {!loggedInUser.avatar_url ? 
-        <div>
-            <header>Please Create Your Profile!</header>
-            <form>
-                <p>Upload Profile Picture:</p>
-                <input type='file' onChange={handlePictureFile}/>
-                <p>Add About Me:</p>
-                <input type='text' />
-            </form>
-        </div>   
-        :
-        <div>
-            <img src={loggedInUser.avatar_url}></img>
+            <img className='profile-avatar' src={loggedInUser.avatar_url}></img>
             <div>
                 <div>
-                    {loggedInUser.bio}
+                    {loggedInUser.bio ? loggedInUser.bio : 
+                    <form onSubmit={handleNewBio}>
+                        <textarea placeholder="Share something about you!" className="new-bio" type='text' onChange={(e) => setNewBio(e.target.value)}/>
+                        <p>
+                            <button>Add Bio</button>
+                        </p>
+                    </form>}
                 </div>
-                <FriendsList loggedInUser={loggedInUser} userList={userList}/>
+                <button onClick={handleSeeFriends}>See Friends of {loggedInUser.username}</button>
+                {seeFriends ? <FriendsList loggedInUser={loggedInUser} userList={userList} /> : null}
             </div>
-        </div>
-        }
         </div>
     )
 }

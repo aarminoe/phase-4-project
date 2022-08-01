@@ -34,3 +34,15 @@
   border-radius: 50%;
   width: 100px;
 }
+
+.profile-avatar {
+  border-radius: 50%;
+  width: 200px;
+  margin-left: 45%;
+  margin-top: 100px;
+}
+
+.new-bio {
+  width: 500px;
+  height: 100px;
+}

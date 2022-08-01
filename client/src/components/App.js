@@ -11,6 +11,7 @@ import Notifications from './Notifications';
 import Groups from './Groups';
 import Search from './Search';
 import FriendsList from './FriendsList';
+import OtherUsersProfile from './OtherUsersProfile';
 
 
 
@@ -21,6 +22,7 @@ function App() {
   const [userList, setUserList] = useState([])
   const [loggedInUser, setLoggedInUser] = useState(null)
   const [needProfile, setNeedProfile] = useState(false)
+  const [friendData, setFriendData] = useState(null)
 
   function handleUserLogIn(user) {
     setUserLoggedIn(true)
@@ -32,6 +34,10 @@ function App() {
     setUserList(updatedUserList)
   }
 
+  function toOtherProfile(user) {
+    setFriendData(user)
+  }
+
   useEffect(() => {
     fetch('/me')
     .then(res => {
@@ -40,10 +46,6 @@ function App() {
       }
     })
   }, [])
-  
-  console.log(loggedInUser)
-
-
 
   useEffect(() => {
     fetch('/users')
@@ -79,10 +81,13 @@ function App() {
                   <Groups userList={userList}/>
                 </Route>
                 <Route exact path='/search'>
-                  <Search userList={userList} loggedInUser={loggedInUser}/>
+                  <Search userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}/>
                 </Route>
                 <Route exact path='/friends'>
-                  <FriendsList userList={userList} loggedInUser={loggedInUser}/>
+                  <FriendsList userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}/>
+                </Route>
+                <Route exact path='/other-user-profile'>
+                  <OtherUsersProfile userList={userList} loggedInUser={loggedInUser} friendData={friendData}/>
                 </Route>
                 
               </Switch>
