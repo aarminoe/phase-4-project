@@ -1,7 +1,8 @@
 import React, { useState } from "react"
+import FriendsList from "./FriendsList"
 
 
-function Profile({loggedInUser}) {
+function Profile({loggedInUser, userList}) {
 
     const [pictureFile, setPictureFile] = useState(null)
 
@@ -30,6 +31,7 @@ function Profile({loggedInUser}) {
                 <div>
                     {loggedInUser.bio}
                 </div>
+                <FriendsList loggedInUser={loggedInUser} userList={userList}/>
             </div>
         </div>
         }

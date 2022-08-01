@@ -31,6 +31,10 @@ function OneSearchedUser({user, loggedInUser}) {
             console.log(data)
         })
     }
+
+    function goToProfile() {
+        console.log(user)
+    }
     console.log(loggedInUser.friends.values())
     console.log(user)
     return (
@@ -38,7 +42,7 @@ function OneSearchedUser({user, loggedInUser}) {
             {loggedInUser.username == user.username ? null : 
             <div>
                 <img className="avatar" src={user.avatar_url}></img>
-                <p>{user.username}</p>
+                <p onClick={goToProfile}>{user.username}</p>
                 <p>{user.bio}</p>
                 <button onClick={handleAddFriend}>Add friend</button>              
             </div>  }    

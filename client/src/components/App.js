@@ -67,7 +67,7 @@ function App() {
                   <Home userList={userList} loggedInUser={loggedInUser}/>}
                 </Route>
                 <Route exact path='/profile'>
-                  <Profile loggedInUser={loggedInUser}/>
+                  <Profile loggedInUser={loggedInUser} userList={userList}/>
                 </Route>
                 <Route exact path='/messages'>
                   <Messages userList={userList} loggedInUser={loggedInUser}/>
