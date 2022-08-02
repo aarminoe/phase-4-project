@@ -7,6 +7,9 @@ User.create(username: 'Aarontest', password: '12345678', password_confirmation: 
 20.times do 
     User.create!(username: Faker::Name.unique.first_name, password: '12345678', password_confirmation: '12345678', avatar_url: Faker::LoremFlickr.image)
 end
+10.times do
+    Group.create(name: Faker::Hobby.unique.activity)
+end
 Post.create(post: 'hi', user_id: 1)
 Post.create(post: 'Crazy night!', user_id: 2)
 Post.create(post: 'still postin123', user_id: 2)

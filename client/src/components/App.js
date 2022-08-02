@@ -23,6 +23,7 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState(null)
   const [needProfile, setNeedProfile] = useState(false)
   const [friendData, setFriendData] = useState(null)
+  const [groupList, setGroupList] = useState([])
 
   function handleUserLogIn(user) {
     setUserLoggedIn(true)
@@ -53,6 +54,12 @@ function App() {
     .then(users => setUserList(users))
   },[])
 
+  useEffect(() => {
+    fetch('/groups')
+    .then(resp => resp.json())
+    .then(groups => setGroupList(groups))
+  },[])
+
   if (loggedInUser) {
     if (loggedInUser.avatar_url) {
       return (
@@ -78,7 +85,7 @@ function App() {
                   <Notifications userList={userList}/>
                 </Route>
                 <Route exact path='/groups'>
-                  <Groups userList={userList}/>
+                  <Groups userList={userList} groupList={groupList} loggedInUser={loggedInUser}/>
                 </Route>
                 <Route exact path='/search'>
                   <Search userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}/>

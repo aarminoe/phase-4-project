@@ -1,9 +1,31 @@
+import React, { useState } from "react"
 
+function Group({group, loggedInUser}) {
 
-function Group() {
+    const [currentGroup, setCurrentGroup] = useState(null)
+    
+    function handleJoinGroup() {
+        setCurrentGroup(group)
+        fetch(`usergroups`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: loggedInUser.id,
+                group_id: currentGroup.id
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => console.log(data))
+    }
+
     return(
         <div>
-            Group
+            {group.name}
+            <p>
+                <button onClick={handleJoinGroup}>Join!</button>
+            </p>
         </div>
     )
 }

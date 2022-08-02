@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom"
 function OneSearchedUser({user, loggedInUser, onToOtherProfile}) {
 
     const [friendAdded, setFriendAdded] = useState(false)
-    const [userFriendsList, setUserFriendsList] = useState([])
+
     
 
     function goToProfile(e) {
