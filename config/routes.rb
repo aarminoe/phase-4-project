@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   post "/log", to: "sessions#create"
   get "/me", to: "users#show"
   
+  resources :groups do
+    resources :users
+  end
   
   resources :users do
     resources :messages

@@ -1,13 +1,17 @@
 import React, { useState } from "react"
 import Friend from "./Friend"
 
-function FriendsList({loggedInUser, userList, onToOtherProfile}) {
+function FriendsList({loggedInUser, userList, onToOtherProfile, clickedUserData, setSeeFriends, seeFriends}) {
 
     
     return (
         <div>
-            {loggedInUser.friends.map((friend) => {
-                return <Friend friend={friend} onToOtherProfile={onToOtherProfile}/>
+            {clickedUserData ?
+            clickedUserData.friends.map((friend) => {
+                return <Friend friend={friend} onToOtherProfile={onToOtherProfile} userList={userList} setSeeFriends={setSeeFriends}/>
+            })
+            : loggedInUser.friends.map((friend) => {
+                return <Friend friend={friend} onToOtherProfile={onToOtherProfile} userList={userList}/>
             })}
         </div>
     )

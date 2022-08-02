@@ -5,6 +5,7 @@ function OneSearchedUser({user, loggedInUser, onToOtherProfile}) {
 
     const [friendAdded, setFriendAdded] = useState(false)
     const [userFriendsList, setUserFriendsList] = useState([])
+    
 
     function goToProfile(e) {
         console.log(user.avatar_url)
@@ -36,7 +37,6 @@ function OneSearchedUser({user, loggedInUser, onToOtherProfile}) {
     function goToProfile() {
         console.log(user)
     }
-    console.log(loggedInUser.friends.values())
     console.log(user)
     return (
         <form onSubmit={goToProfile}>

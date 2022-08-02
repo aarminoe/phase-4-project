@@ -87,7 +87,7 @@ function App() {
                   <FriendsList userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}/>
                 </Route>
                 <Route exact path='/other-user-profile'>
-                  <OtherUsersProfile userList={userList} loggedInUser={loggedInUser} friendData={friendData}/>
+                  <OtherUsersProfile userList={userList} loggedInUser={loggedInUser} friendData={friendData} onToOtherProfile={toOtherProfile}/>
                 </Route>
                 
               </Switch>
