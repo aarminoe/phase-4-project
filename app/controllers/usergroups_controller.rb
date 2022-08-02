@@ -5,7 +5,7 @@ class UsergroupsController < ApplicationController
         if usergroup.valid? 
             render json: usergroup 
         else
-            render json: { errors: usergroup.full_messages }, status: :unprocessable_entity
+            render json: { errors: usergroup.errors.full_messages }, status: :unprocessable_entity
         end
     end
 

@@ -39,6 +39,10 @@ function App() {
     setFriendData(user)
   }
 
+  function handleNewPost() {
+
+  }
+
   useEffect(() => {
     fetch('/me')
     .then(res => {
@@ -73,7 +77,7 @@ function App() {
               <Switch>
                 <Route exact path='/'>
                   {needProfile ? <Redirect to='/profile' /> : 
-                  <Home userList={userList} loggedInUser={loggedInUser}/>}
+                  <Home userList={userList} loggedInUser={loggedInUser} onHandleNewPost={handleNewPost}/> }
                 </Route>
                 <Route exact path='/profile'>
                   <Profile loggedInUser={loggedInUser} userList={userList}/>
