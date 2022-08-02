@@ -7,7 +7,6 @@ import Home from './Home';
 import Header from './Header';
 import Profile from './Profile';
 import Messages from './Messages';
-import Notifications from './Notifications';
 import Groups from './Groups';
 import Search from './Search';
 import FriendsList from './FriendsList';
@@ -84,9 +83,6 @@ function App() {
                 </Route>
                 <Route exact path='/messages'>
                   <Messages userList={userList} loggedInUser={loggedInUser}/>
-                </Route>
-                <Route exact path='/notifications'>
-                  <Notifications userList={userList}/>
                 </Route>
                 <Route exact path='/groups'>
                   <Groups userList={userList} groupList={groupList} loggedInUser={loggedInUser}/>

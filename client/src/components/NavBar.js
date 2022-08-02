@@ -20,10 +20,6 @@ function NavBar() {
             activeStyle={{color: 'black'}}>Groups</NavLink>
             <NavLink 
             className='navlink'
-            exact to='/notifications' 
-            activeStyle={{color: 'black'}}>Notifications</NavLink>
-            <NavLink 
-            className='navlink'
             exact to='/messages' 
             activeStyle={{color: 'black'}}>Messages</NavLink>
             <NavLink 
