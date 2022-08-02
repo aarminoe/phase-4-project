@@ -13,7 +13,7 @@ function Friend({friend,userList,onToOtherProfile, setSeeFriends, seeFriends}) {
                 onToOtherProfile(user)
             }
         })
-        setSeeFriends((seeFriends) => !seeFriends)
+       setSeeFriends((seeFriends) => !seeFriends)
     }
    
     console.log(friend)

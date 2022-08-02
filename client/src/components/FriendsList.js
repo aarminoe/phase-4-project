@@ -4,14 +4,15 @@ import Friend from "./Friend"
 function FriendsList({loggedInUser, userList, onToOtherProfile, clickedUserData, setSeeFriends, seeFriends}) {
 
     
+    
     return (
         <div>
             {clickedUserData ?
             clickedUserData.friends.map((friend) => {
-                return <Friend friend={friend} onToOtherProfile={onToOtherProfile} userList={userList} setSeeFriends={setSeeFriends}/>
+                return <Friend friend={friend} onToOtherProfile={onToOtherProfile} userList={userList} setSeeFriends={setSeeFriends} seeFriends={seeFriends}/>
             })
             : loggedInUser.friends.map((friend) => {
-                return <Friend friend={friend} onToOtherProfile={onToOtherProfile} userList={userList}/>
+                return <Friend friend={friend} onToOtherProfile={onToOtherProfile} userList={userList} setSeeFriends={setSeeFriends} seeFriends={seeFriends}/>
             })}
         </div>
     )

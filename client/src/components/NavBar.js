@@ -30,10 +30,6 @@ function NavBar() {
             className='navlink'
             exact to='/search' 
             activeStyle={{color: 'black'}}>Search</NavLink>
-            <NavLink 
-            className='navlink'
-            exact to='/friends' 
-            activeStyle={{color: 'black'}}>Friends</NavLink>
        </div> 
     )
 }

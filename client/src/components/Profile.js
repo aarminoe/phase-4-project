@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import FriendsList from "./FriendsList"
 
 
-function Profile({loggedInUser, userList}) {
+function Profile({loggedInUser, userList,onToOtherProfile}) {
 
     const [pictureFile, setPictureFile] = useState(null)
     const [seeFriends, setSeeFriends] = useState(false)
@@ -48,7 +48,7 @@ function Profile({loggedInUser, userList}) {
                     </form>}
                 </div>
                 <button onClick={handleSeeFriends}>See Friends of {loggedInUser.username}</button>
-                {seeFriends ? <FriendsList loggedInUser={loggedInUser} userList={userList} /> : null}
+                {seeFriends ? <FriendsList loggedInUser={loggedInUser} userList={userList} onToOtherProfile={onToOtherProfile} setSeeFriends={setSeeFriends} seeFriends={seeFriends}/> : null}
             </div>
         </div>
     )

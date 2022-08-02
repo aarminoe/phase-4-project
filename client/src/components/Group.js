@@ -5,6 +5,8 @@ function Group({group, loggedInUser}) {
     const [currentGroup, setCurrentGroup] = useState(null)
     
     function handleJoinGroup() {
+        console.log(group.id)
+        console.log(loggedInUser.id)
         setCurrentGroup(group)
         fetch(`usergroups`, {
             method: 'POST',
@@ -13,7 +15,7 @@ function Group({group, loggedInUser}) {
             },
             body: JSON.stringify({
                 user_id: loggedInUser.id,
-                group_id: currentGroup.id
+                group_id: group.id
             })
         })
         .then(resp => resp.json())
@@ -24,7 +26,7 @@ function Group({group, loggedInUser}) {
         <div>
             {group.name}
             <p>
-                <button onClick={handleJoinGroup}>Join!</button>
+                {group.users.includes(loggedInUser.id) ? null : <button onClick={handleJoinGroup}>Join!</button>}
             </p>
         </div>
     )

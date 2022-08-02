@@ -80,7 +80,7 @@ function App() {
                   <Home userList={userList} loggedInUser={loggedInUser} onHandleNewPost={handleNewPost}/> }
                 </Route>
                 <Route exact path='/profile'>
-                  <Profile loggedInUser={loggedInUser} userList={userList}/>
+                  <Profile loggedInUser={loggedInUser} userList={userList} onToOtherProfile={toOtherProfile}/>
                 </Route>
                 <Route exact path='/messages'>
                   <Messages userList={userList} loggedInUser={loggedInUser}/>
