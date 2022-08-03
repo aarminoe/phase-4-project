@@ -8,7 +8,7 @@ function Group({group, loggedInUser}) {
         console.log(group.id)
         console.log(loggedInUser.id)
         setCurrentGroup(group)
-        fetch(`usergroups`, {
+        fetch(`/usergroups`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

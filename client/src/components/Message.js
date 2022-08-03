@@ -10,10 +10,12 @@ function Message({message, loggedInUser}) {
         .then(d => console.log(deletedMessage))
     }
 
+    
+
     return(
         <div>
             <button onClick={handleDeleteMessage}>🞭</button>
-            {message.user_who_messaged} said: 
+            {message} said: 
             <p>
                 {message.message}
             </p>

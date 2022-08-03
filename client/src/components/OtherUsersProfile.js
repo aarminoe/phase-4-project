@@ -1,13 +1,14 @@
 import React, { useState } from "react"
 import FriendsList from "./FriendsList"
 
-function OtherUsersProfile({friendData, userList, onToOtherProfile}) {
+function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser}) {
 
     console.log(console.log(friendData))
 
     const [seeFriends, setSeeFriends] = useState(false)
     const [clickedUserData, setClickedUserData] = useState(null)
     const [sendingMessage, setSendingMessage] = useState(false)
+    const [message, setMessage] = useState('')
 
     function handleOtherProfileFriends() {
         userList.forEach((user) => {
@@ -24,7 +25,21 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile}) {
 
     function handleNewMessageSend(e) {
         e.preventDefault()
+        console.log(message)
         console.log(friendData)
+        fetch(`/users/${friendData.id}/messages`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message: message,
+                who_messaged: loggedInUser.username,
+                user_id: friendData.id
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => console.log(data))
     }
 
     return (
@@ -36,7 +51,7 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile}) {
                 <div>
                     {sendingMessage ?
                     <form onSubmit={handleNewMessageSend}>
-                        <input type='text'></input>
+                        <input type='text' onChange={(e) => setMessage(e.target.value)}></input>
                         <button>Send</button> 
                     </form> 
                     : null}

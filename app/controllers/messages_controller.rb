@@ -9,4 +9,19 @@ class MessagesController < ApplicationController
             render json: { error: 'Message not found' }, status: :not_found
         end
     end
+
+    def create
+        message = Message.create(message_params)
+        if message.valid?
+            render json: message, status: :created 
+        else
+            render json: { errors: message.errors.full_messages }, status: :unprocessable_entity
+        end
+    end
+
+    private 
+
+    def message_params 
+        params.permit(:user_id, :who_messaged, :message)
+    end 
 end
