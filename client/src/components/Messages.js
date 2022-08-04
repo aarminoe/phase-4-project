@@ -7,26 +7,33 @@ function Messages({loggedInUser, conversation, userList}) {
 
     const [replyMessage, setReplyMessage] = useState('')
     const [userToReplyTo, setUserToReplyTo] = useState(null)
+    const [sentConversationData, setSentConversationData] = useState(null)
 
 
 
     function handleReplyMessage(e) {
         setReplyMessage(e.target.value)
+        console.log(conversation)
         userList.forEach((user) => {
+            console.log('here')
             if (user.username === conversation.conversation_with) {
                 setUserToReplyTo(user)
+                user.conversations.forEach((conversation) => {
+                    if (conversation.conversation_with === loggedInUser.username) {
+                        setSentConversationData(conversation.id)
+                    }
+                })
             }
         })
     }
 
+
+
     function handleReplyMessageSend(e) {
         e.preventDefault()
-        console.log(conversation.id)
-    
-        console.log(replyMessage)
 
-        console.log(userToReplyTo)
-        fetch(`/users/${userToReplyTo.id}/conversations/${conversation.id}/messages`, {
+        
+        fetch(`/users/${userToReplyTo.id}/conversations/${sentConversationData}/messages`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,11 +41,12 @@ function Messages({loggedInUser, conversation, userList}) {
             body: JSON.stringify({
                 message: replyMessage,
                 who_messaged: loggedInUser.username,
-                conversation_id: conversation.id
+                conversation_id: sentConversationData
             })
         })
         .then(resp => resp.json())
         .then(data => console.log(data))
+        
     }
 
     return(
@@ -46,10 +54,11 @@ function Messages({loggedInUser, conversation, userList}) {
             {conversation.messages.map((message) => {
                 return <Message message={message} loggedInUser={loggedInUser} userList={userList} conversation={conversation}/>
             })}
+            {conversation.messages[0] ? 
             <form onSubmit={handleReplyMessageSend}>
                 <input type='text' placeholder='Reply...' onChange={handleReplyMessage}></input>
                 <button>send</button>
-            </form>
+            </form> : null}
         </div>
     )
 }

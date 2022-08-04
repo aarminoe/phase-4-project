@@ -74,6 +74,22 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser
                 handleConversationMessage(data)
                 setHasConversationWith(true)
             })
+            fetch(`/users/${loggedInUser.id}/conversations`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    conversation_with: friendData.username,
+                    user_id: loggedInUser.id
+                })
+            })
+            .then(resp => resp.json())
+            .then(data => {
+                handleConversationMessage(data)
+                setHasConversationWith(true)
+            })
+            
 
         }
         // fetch(`/users/${friendData.id}/messages`, {
@@ -106,6 +122,7 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser
         })
         .then(resp => resp.json())
         .then(data => console.log(data))
+        
     }
 
     return (
