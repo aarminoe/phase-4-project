@@ -20,6 +20,7 @@ function Messages({loggedInUser, conversation, userList}) {
                 setUserToReplyTo(user)
                 user.conversations.forEach((conversation) => {
                     if (conversation.conversation_with === loggedInUser.username) {
+                        console.log(conversation.id)
                         setSentConversationData(conversation.id)
                     }
                 })
@@ -32,7 +33,8 @@ function Messages({loggedInUser, conversation, userList}) {
     function handleReplyMessageSend(e) {
         e.preventDefault()
 
-        
+        console.log(conversation)
+        console.log(sentConversationData)
         fetch(`/users/${userToReplyTo.id}/conversations/${sentConversationData}/messages`, {
             method: 'POST',
             headers: {
@@ -46,8 +48,23 @@ function Messages({loggedInUser, conversation, userList}) {
         })
         .then(resp => resp.json())
         .then(data => console.log(data))
+        fetch(`/users/${loggedInUser.id}/conversations/${conversation.id}/messages`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message: replyMessage,
+                who_messaged: loggedInUser.username,
+                conversation_id: conversation.id
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => console.log(data))
         
     }
+
+    
 
     return(
         <div>
