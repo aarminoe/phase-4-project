@@ -46,3 +46,9 @@
   width: 500px;
   height: 100px;
 }
+
+.avatar-group-member {
+  margin-top: 50px;
+  border-radius: 50%;
+  width: 35px;
+}

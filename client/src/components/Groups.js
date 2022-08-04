@@ -1,11 +1,11 @@
 import Group from "./Group"
 
-function Groups({groupList, loggedInUser}) {
+function Groups({groupList, loggedInUser, onToOtherProfile}) {
     console.log(groupList)
     return( 
         <div>
             {groupList.map((group) => {
-                return <Group group={group} loggedInUser={loggedInUser}/>
+                return <Group group={group} loggedInUser={loggedInUser} onToOtherProfile={onToOtherProfile}/>
             })}
         </div>
     )

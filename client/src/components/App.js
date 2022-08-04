@@ -86,7 +86,7 @@ function App() {
                   <Conversation userList={userList} loggedInUser={loggedInUser}/>
                 </Route>
                 <Route exact path='/groups'>
-                  <Groups userList={userList} groupList={groupList} loggedInUser={loggedInUser}/>
+                  <Groups userList={userList} groupList={groupList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}/>
                 </Route>
                 <Route exact path='/search'>
                   <Search userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}/>
