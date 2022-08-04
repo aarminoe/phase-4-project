@@ -6,12 +6,13 @@ import NavBar from './NavBar';
 import Home from './Home';
 import Header from './Header';
 import Profile from './Profile';
-import Messages from './Messages';
+import GroupPage from './GroupPage';
 import Groups from './Groups';
 import Search from './Search';
 import FriendsList from './FriendsList';
 import OtherUsersProfile from './OtherUsersProfile';
 import Conversation from './Conversation';
+import Group from './Group';
 
 
 
@@ -24,6 +25,7 @@ function App() {
   const [needProfile, setNeedProfile] = useState(false)
   const [friendData, setFriendData] = useState(null)
   const [groupList, setGroupList] = useState([])
+  const [groupClickedOn, setGroupClickedOn] = useState(null)
 
   function handleUserLogIn(user) {
     setUserLoggedIn(true)
@@ -41,6 +43,10 @@ function App() {
 
   function handleNewPost() {
 
+  }
+
+  function toGroupPage(group) {
+    setGroupClickedOn(group)
   }
 
   useEffect(() => {
@@ -86,7 +92,7 @@ function App() {
                   <Conversation userList={userList} loggedInUser={loggedInUser}/>
                 </Route>
                 <Route exact path='/groups'>
-                  <Groups userList={userList} groupList={groupList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}/>
+                  <Groups userList={userList} groupList={groupList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile} onToGroupPage={toGroupPage} groupClickedOn ={groupClickedOn}/>
                 </Route>
                 <Route exact path='/search'>
                   <Search userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}/>
@@ -96,6 +102,9 @@ function App() {
                 </Route>
                 <Route exact path='/other-user-profile'>
                   <OtherUsersProfile userList={userList} loggedInUser={loggedInUser} friendData={friendData} onToOtherProfile={toOtherProfile} />
+                </Route>
+                <Route exact path='/group-page'>
+                  <GroupPage userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile} groupClickedOn={groupClickedOn} />
                 </Route>
                 
               </Switch>

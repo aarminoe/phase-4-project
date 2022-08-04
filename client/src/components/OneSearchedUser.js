@@ -5,12 +5,6 @@ function OneSearchedUser({user, loggedInUser, onToOtherProfile}) {
 
     const [friendAdded, setFriendAdded] = useState(false)
 
-    
-
-    function goToProfile(e) {
-        console.log(user.avatar_url)
-    }
-
     function handleAddFriend(e) {
         e.preventDefault()
         setFriendAdded(true)
@@ -34,12 +28,9 @@ function OneSearchedUser({user, loggedInUser, onToOtherProfile}) {
         })
     }
 
-    function goToProfile() {
-        console.log(user)
-    }
-    console.log(user)
+
     return (
-        <form onSubmit={goToProfile}>
+        <form>
             {loggedInUser.username == user.username ? null : 
             <div>
                 <img className="avatar" src={user.avatar_url}></img>

@@ -28,22 +28,13 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser
 
     function handleNewMessageSend(e) {
         e.preventDefault()
-        console.log(message)
-        console.log(friendData)
-        console.log(loggedInUser.conversations)
         friendData.conversations.forEach((conversation) => {
-            console.log(conversation)
-            console.log(loggedInUser)
             if (conversation.conversation_with === loggedInUser.username) {
                 setHasConversationWith(true)
-                console.log(conversation.conversation_with)
                 setConversationId(conversation.id)
-                console.log(hasConversationWith)
             }
         })
         if (hasConversationWith) {
-            console.log('it is true!')
-            console.log(conversationId)
             fetch(`/users/${friendData.id}/conversations/${conversationId}/messages`, {
                 method: 'POST',
                 headers: {
@@ -88,27 +79,11 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser
             .then(data => {
                 handleConversationMessage(data)
                 setHasConversationWith(true)
-            })
-            
-
+            })        
         }
-        // fetch(`/users/${friendData.id}/messages`, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         message: message,
-        //         who_messaged: loggedInUser.username,
-        //         user_id: friendData.id
-        //     })
-        // })
-        // .then(resp => resp.json())
-        // .then(data => console.log(data))
     }
 
     function handleConversationMessage(data) {
-        console.log(data)
         fetch(`/users/${friendData.id}/conversations/${data.id}/messages`, {
             method: 'POST',
             headers: {
