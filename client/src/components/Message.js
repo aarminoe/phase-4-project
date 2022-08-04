@@ -1,24 +1,30 @@
+import React, { useState } from "react"
 
 
-function Message({message, loggedInUser}) {
+function Message({message, loggedInUser, userList, conversation}) {
     console.log(message)
+    console.log(userList)
+    
 
-    function handleDeleteMessage(deletedMessage) {
-        fetch(`/users/${loggedInUser.id}/messages/${message.id}`, {
+    function handleDeleteMessage() {
+        console.log(message)
+        fetch(`/users/${loggedInUser}/conversations/${conversation.id}/messages/${message.id}`, {
             method: 'DELETE',
         })
-        .then(d => console.log(deletedMessage))
     }
-
     
 
     return(
         <div>
-            <button onClick={handleDeleteMessage}>🞭</button>
-            {message} said: 
-            <p>
-                {message.message}
-            </p>
+            
+            <div>
+                {message.who_messaged} said: 
+                <p>
+                    <button onClick={handleDeleteMessage}>🞭</button>
+                    {message.message}
+                </p>
+                
+            </div>
         </div>
     )
 }

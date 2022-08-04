@@ -6,7 +6,8 @@ class User < ApplicationRecord
     has_many :groups, through: :usergroups
     has_many :comments, through: :posts, dependent: :destroy
     has_many :comment_likes, through: :comments, dependent: :destroy
-    has_many :messages
+    has_many :conversations
+    has_many :messages, through: :conversations
 
     has_secure_password
 

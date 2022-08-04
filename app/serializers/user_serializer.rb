@@ -3,7 +3,7 @@ class UserSerializer < ActiveModel::Serializer
 
   has_many :friends
   has_many :groups
+  has_many :conversations, include_nested_associations: true
   has_many :posts, include_nested_associations: true
-  has_many :messages
 
 end

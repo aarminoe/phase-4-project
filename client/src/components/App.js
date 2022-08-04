@@ -11,6 +11,7 @@ import Groups from './Groups';
 import Search from './Search';
 import FriendsList from './FriendsList';
 import OtherUsersProfile from './OtherUsersProfile';
+import Conversation from './Conversation';
 
 
 
@@ -82,7 +83,7 @@ function App() {
                   <Profile loggedInUser={loggedInUser} userList={userList} onToOtherProfile={toOtherProfile}/>
                 </Route>
                 <Route exact path='/messages'>
-                  <Messages userList={userList} loggedInUser={loggedInUser}/>
+                  <Conversation userList={userList} loggedInUser={loggedInUser}/>
                 </Route>
                 <Route exact path='/groups'>
                   <Groups userList={userList} groupList={groupList} loggedInUser={loggedInUser}/>

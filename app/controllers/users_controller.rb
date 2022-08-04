@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     
     def index
         users = User.all 
-        render json: users, include: ['profile', 'friends', 'groups', 'posts', 'posts.comments', 'posts.post_likes', 'posts.comments.comment_likes', 'messages']
+        render json: users, include: ['profile', 'friends', 'groups', 'posts', 'posts.comments', 'posts.post_likes', 'posts.comments.comment_likes', 'conversations.messages', 'conversations']
     end
 
     def create 
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
     def show
         current_user = User.find(session[:user_id])
-        render json: current_user
+        render json: current_user, include: ['profile', 'friends', 'groups', 'posts', 'posts.comments', 'posts.post_likes', 'posts.comments.comment_likes', 'conversations.messages', 'conversations']
     end
     
     def update

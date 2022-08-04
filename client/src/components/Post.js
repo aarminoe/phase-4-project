@@ -3,7 +3,7 @@ import React, {useState} from "react";
 
 function Post({post, user, loggedInUser}) {
 
-    
+    console.log(post)
 
     function handleLike() {
         console.log(user)

@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   resources :usergroups
   
   resources :users do
-    resources :messages
+    resources :conversations do
+      resources :messages
+    end
     resources :groups
     resources :profiles
     resources :friends
