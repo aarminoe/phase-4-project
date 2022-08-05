@@ -14,6 +14,16 @@ class PostsController < ApplicationController
         end
     end
 
+    def destroy 
+        post = Post.find_by(id:params[:id])
+        if post 
+            post.destroy
+            head :no_content
+        else
+            render json: { error: 'Post not found' }, status: :not_found
+        end
+    end
+
     private
 
     def post_params 

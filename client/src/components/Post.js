@@ -3,13 +3,19 @@ import React, {useState} from "react";
 
 function Post({post, user, loggedInUser}) {
 
-    console.log(post)
+    console.log(post.user.username)
+    console.log(loggedInUser.username)
+
+
 
     function handleLike() {
         console.log(user)
         console.log(post)
         console.log(loggedInUser.username)
-        fetch(`/users/${user.id}/posts/${post.id}/post_likes`, {
+        if (post.user.username === loggedInUser.username) {
+            console.log('hi')
+        }
+        fetch(`/users/${post.user.id}/posts/${post.id}/post_likes`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -22,9 +28,17 @@ function Post({post, user, loggedInUser}) {
         .then(d => console.log(d))
     }
 
+    function handleDeletePost() {
+        console.log(post.user)
+        fetch(`/users/${post.user.id}/posts/${post.id}`, {
+            method: 'DELETE'
+        })
+    }
+
     return (
         <div className="post-card">
             <p>{post.user.username} posted:</p>
+            {post.user.username == loggedInUser.username ? <button onClick={handleDeletePost}>X</button> : null}
             Post {post.post}
             <button onClick={handleLike}>👍</button>
             <p className="who-liked">
