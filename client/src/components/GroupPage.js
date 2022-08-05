@@ -10,6 +10,7 @@ function GroupPage({groupClickedOn, loggedInUser, onToOtherProfile}) {
     const [seeGroupMembers, setSeeGroupMembers] = useState(false)
     const [userInGroup, setUserInGroup] = useState(false)
     const [newGroupMessage, setNewGroupMessage] = useState('')
+    const [notInGroupError, setNotInGroupError] =useState(false)
 
     function handleJoinGroup() {
         console.log(groupClickedOn.id)
@@ -39,25 +40,28 @@ function GroupPage({groupClickedOn, loggedInUser, onToOtherProfile}) {
     }
 
     function handleNewGroupMessage(e) {
-        console.log('hwo')
         e.preventDefault()
-        fetch('/group_messages', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                message: newGroupMessage,
-                user_id: loggedInUser.id,
-                group_id: groupClickedOn.id,
-                sender_name: loggedInUser.username,
-                sender_avatar_url: loggedInUser.avatar_url
-            })
-        })
-        .then(resp => resp.json())
-        .then(data => {
-            console.log(data)
-            setNewGroupMessage('')
+        loggedInUser.groups.forEach((group) => {
+            if (group.name === groupClickedOn.name) {
+                fetch('/group_messages', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: newGroupMessage,
+                        user_id: loggedInUser.id,
+                        group_id: groupClickedOn.id,
+                        sender_name: loggedInUser.username,
+                        sender_avatar_url: loggedInUser.avatar_url
+                    })
+                })
+                .then(resp => resp.json())
+                .then(data => {
+                    console.log(data)
+                    setNewGroupMessage('')
+                })
+            }
         })
     }
 
@@ -68,7 +72,10 @@ function GroupPage({groupClickedOn, loggedInUser, onToOtherProfile}) {
                 {seeGroupMembers ? 
                 <div>
                     <button  onClick={handleSeeGroupUsers}>Hide Members</button>
-                </div> :<button onClick={handleSeeGroupUsers}>See Members</button>}
+                </div> :
+                <div>
+                    <button onClick={handleSeeGroupUsers}>See Members/Join Group</button>
+                </div>}
                 {!userInGroup && seeGroupMembers ?<button onClick={handleJoinGroup}>Join Group</button>:null }
                 {seeGroupMembers ? groupClickedOn.users.map((user) => {
                     return <GroupMember user={user} onToOtherProfile={onToOtherProfile}/>
