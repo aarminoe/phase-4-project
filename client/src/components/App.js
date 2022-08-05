@@ -26,6 +26,7 @@ function App() {
   const [friendData, setFriendData] = useState(null)
   const [groupList, setGroupList] = useState([])
   const [groupClickedOn, setGroupClickedOn] = useState(null)
+  const [postList, setPostList] = useState([])
 
   function handleUserLogIn(user) {
     setUserLoggedIn(true)
@@ -70,6 +71,13 @@ function App() {
     .then(groups => setGroupList(groups))
   },[])
 
+  useEffect(() => {
+    fetch('/posts')
+    .then(resp => resp.json())
+    .then(posts => setPostList(posts))
+  },[])
+
+
   if (loggedInUser) {
     if (loggedInUser.avatar_url) {
       return (
@@ -83,7 +91,7 @@ function App() {
               <Switch>
                 <Route exact path='/'>
                   {needProfile ? <Redirect to='/profile' /> : 
-                  <Home userList={userList} loggedInUser={loggedInUser} onHandleNewPost={handleNewPost}/> }
+                  <Home userList={userList} loggedInUser={loggedInUser} onHandleNewPost={handleNewPost} postList={postList}/> }
                 </Route>
                 <Route exact path='/profile'>
                   <Profile loggedInUser={loggedInUser} userList={userList} onToOtherProfile={toOtherProfile}/>

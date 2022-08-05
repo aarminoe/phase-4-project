@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   
   post "/log", to: "sessions#create"
   get "/me", to: "users#show"
+  get '/posts', to: 'posts#index'
   
   resources :groups do
     resources :users

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Posts from "./Posts";
+import Post from "./Post";
 
 
-function Home({userList, loggedInUser, onHandleNewPost}) {
-
+function Home({userList, loggedInUser, onHandleNewPost, postList}) {
+    console.log(userList)
     const [postText, setPostText] = useState('')
 
     function addNewPost(e) {
@@ -22,6 +22,7 @@ function Home({userList, loggedInUser, onHandleNewPost}) {
         .then(data => console.log(data))
     }
 
+    console.log(postList)
     return(
         <div>
             <div>
@@ -30,8 +31,8 @@ function Home({userList, loggedInUser, onHandleNewPost}) {
                     <input type='text' placeholder="Whats on your mind?" onChange={(e) => {setPostText(e.target.value)}}></input>
                     <button>Add Post</button>
                 </form>
-                {userList ? userList.map((user) => {
-                    return  <Posts user={user} loggedInUser={loggedInUser}/>
+                {postList ? postList.sort().map((post) => {
+                    return  <Post post={post} loggedInUser={loggedInUser}/>
                 }):null}
             </div>
         </div>

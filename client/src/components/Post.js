@@ -24,7 +24,7 @@ function Post({post, user, loggedInUser}) {
 
     return (
         <div className="post-card">
-            <p>{user.username} posted:</p>
+            <p>{post.user.username} posted:</p>
             Post {post.post}
             <button onClick={handleLike}>👍</button>
             <p className="who-liked">

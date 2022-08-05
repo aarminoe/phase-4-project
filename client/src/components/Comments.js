@@ -5,7 +5,7 @@ function Comments({post, user}) {
     return (
         <div className="comments-card">
             {post.comments ? post.comments.map((comment) => {
-                return <Comment comment={comment} user={user} />
+                return <Comment comment={comment} post={post} />
             }):null}
         </div>
     )
