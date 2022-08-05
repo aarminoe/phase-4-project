@@ -2,9 +2,12 @@ import Comments from "./Comments";
 import React, {useState} from "react";
 
 function Post({post, user, loggedInUser}) {
-
+    console.log(post)
     console.log(post.user.username)
     console.log(loggedInUser.username)
+
+    const [editPost, setEditPost] = useState(false)
+    const [editPostText, setEditPostText] = useState('')
 
 
 
@@ -35,10 +38,39 @@ function Post({post, user, loggedInUser}) {
         })
     }
 
+    function handleEditPost(e) {
+        e.preventDefault()
+        fetch(`/users/${post.user.id}/posts/${post.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                post: editPostText
+            })
+        })
+        .then(resp => resp.json)
+        .then(data => console.log(data))
+    }
+    
+    function handleEditPostClick() {
+        setEditPost((editPost) => !editPost)
+    }
+
     return (
         <div className="post-card">
             <p>{post.user.username} posted:</p>
             {post.user.username == loggedInUser.username ? <button onClick={handleDeletePost}>X</button> : null}
+            {editPost ? 
+            <div>
+                <form onSubmit={handleEditPost}>
+                    <input type='text' onChange={(e) => setEditPostText(e.target.value)}></input>
+                    <button>Add Edit</button>
+                </form>
+            </div>
+        :null}
+            {post.user.username == loggedInUser.username ? <button onClick={handleEditPostClick}>Edit Post</button>: null}
+            <p>{post.created_at}</p>
             Post {post.post}
             <button onClick={handleLike}>👍</button>
             <p className="who-liked">
