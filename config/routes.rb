@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
   
   resources :usergroups
-  
+  resources :group_messages
   resources :users do
     resources :conversations do
       resources :messages

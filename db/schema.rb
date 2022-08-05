@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_03_204555) do
+ActiveRecord::Schema.define(version: 2022_08_04_230209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,16 @@ ActiveRecord::Schema.define(version: 2022_08_03_204555) do
     t.string "username"
     t.string "avatar_url"
     t.string "bio"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "group_messages", force: :cascade do |t|
+    t.string "message"
+    t.string "sender_name"
+    t.string "sender_avatar_url"
+    t.integer "group_id"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

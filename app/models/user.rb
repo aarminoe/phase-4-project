@@ -8,6 +8,7 @@ class User < ApplicationRecord
     has_many :comment_likes, through: :comments, dependent: :destroy
     has_many :conversations
     has_many :messages, through: :conversations
+    has_many :group_messages
 
     has_secure_password
 
