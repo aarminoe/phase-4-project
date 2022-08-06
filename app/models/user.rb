@@ -10,6 +10,7 @@ class User < ApplicationRecord
     has_many :messages, through: :conversations
     has_many :group_messages
 
+
     has_secure_password
 
     validates :username, uniqueness: true, presence: true, length: {within: 3..24}

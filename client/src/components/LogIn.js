@@ -126,7 +126,7 @@ function LogIn({onHandleUserLogIn, setNeedProfile, onHandleNewUser, setLoggedInU
               <p>
                 Pass:
               </p>
-              <input onChange={(e) => setPass(e.target.value)} type='text' />
+              <input onChange={(e) => setPass(e.target.value)} type='password' />
               <p>
                 <button onClick={handleLogInError}>Log In!</button>
               </p>

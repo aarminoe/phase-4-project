@@ -1,5 +1,5 @@
 class CommentSerializer < ActiveModel::Serializer
-  attributes :id, :comment
+  attributes :id, :comment, :who_commented
 
   has_many :comment_likes
   belongs_to :post

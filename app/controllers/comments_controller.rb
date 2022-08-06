@@ -9,9 +9,19 @@ class CommentsController < ApplicationController
         end
     end
 
+    def destroy 
+        comment = Comment.find_by(id:params[:id])
+        if comment 
+            comment.destroy 
+            head :no_content
+        else
+            render json: { error: 'Comment not found' }, status: :not_found
+        end
+    end
+
     private
 
     def comment_params
-        params.permit(:post_id, :comment)
+        params.permit(:post_id, :comment, :who_commented)
     end
 end

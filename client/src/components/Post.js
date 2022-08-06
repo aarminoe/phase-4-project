@@ -76,7 +76,7 @@ function Post({post, user, loggedInUser}) {
             <p className="who-liked">
                 {post.post_likes.length !== 0 && post.post_likes.length > 1 ? <p>{post.post_likes[0].user_who_liked} and {post.post_likes.length} other people liked this</p>: null}
                 {post.post_likes.length === 1 ? <p>{post.post_likes[0].user_who_liked} liked this</p>: null}
-                <Comments post={post} user={user}/>
+                <Comments post={post} loggedInUser={loggedInUser}/>
             </p>
         </div>
     )

@@ -1,7 +1,7 @@
 import Comment from "./Comment"
 import React, { useState } from "react"
 
-function Comments({post, user}) {
+function Comments({post, loggedInUser}) {
 
     const [addedComment, setAddedComment] = useState('')
     const [seeComments, setSeeComments] = useState(false)
@@ -16,7 +16,8 @@ function Comments({post, user}) {
             },
             body: JSON.stringify({
                 comment: addedComment,
-                post_id: post.id
+                post_id: post.id,
+                who_commented: loggedInUser.username
             })
         })
         .then(resp => resp.json())
@@ -33,7 +34,7 @@ function Comments({post, user}) {
             </form> 
             : null}
             {seeComments ? post.comments.map((comment) => {
-                return <Comment comment={comment} post={post} />
+                return <Comment comment={comment} post={post} loggedInUser={loggedInUser}/>
             }): null}
         </div>
     )
