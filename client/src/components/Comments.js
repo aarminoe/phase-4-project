@@ -21,7 +21,10 @@ function Comments({post, loggedInUser}) {
             })
         })
         .then(resp => resp.json())
-        .then(data => console.log(data))
+        .then(data => {
+            console.log(data)
+            setAddedComment('')
+        })
     }
 
     return (
@@ -29,7 +32,7 @@ function Comments({post, loggedInUser}) {
         <div className="comments-card">
             <button onClick={() => setSeeComments((seeComments) => !seeComments)}>See Comments</button>
             {seeComments ? <form onSubmit={handleAddComment}>
-                <input type='text' onChange={(e) => setAddedComment(e.target.value)}></input>
+                <input type='text' value={addedComment} onChange={(e) => setAddedComment(e.target.value)}></input>
                 <button>Add Comment</button>
             </form> 
             : null}

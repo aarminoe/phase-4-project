@@ -19,7 +19,10 @@ function Home({userList, loggedInUser, onHandleNewPost, postList}) {
             })
         })
         .then(resp => resp.json())
-        .then(data => console.log(data))
+        .then(data => {
+            console.log(data)
+            setPostText('')
+        })
     }
 
     console.log(postList)
@@ -28,7 +31,7 @@ function Home({userList, loggedInUser, onHandleNewPost, postList}) {
             <div>
                 {loggedInUser.username}
                 <form onSubmit={addNewPost}>
-                    <input type='text' placeholder="Whats on your mind?" onChange={(e) => {setPostText(e.target.value)}}></input>
+                    <input type='text' placeholder="Whats on your mind?" value={postText} onChange={(e) => {setPostText(e.target.value)}}></input>
                     <button>Add Post</button>
                 </form>
                 {postList ? postList.sort().map((post) => {

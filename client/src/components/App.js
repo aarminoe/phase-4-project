@@ -94,7 +94,7 @@ function App() {
                   <Home userList={userList} loggedInUser={loggedInUser} onHandleNewPost={handleNewPost} postList={postList}/> }
                 </Route>
                 <Route exact path='/profile'>
-                  <Profile loggedInUser={loggedInUser} userList={userList} onToOtherProfile={toOtherProfile}/>
+                  <Profile loggedInUser={loggedInUser} userList={userList} onToOtherProfile={toOtherProfile} postList={postList}/>
                 </Route>
                 <Route exact path='/messages'>
                   <Conversation userList={userList} loggedInUser={loggedInUser}/>
@@ -109,7 +109,7 @@ function App() {
                   <FriendsList userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}/>
                 </Route>
                 <Route exact path='/other-user-profile'>
-                  <OtherUsersProfile userList={userList} loggedInUser={loggedInUser} friendData={friendData} onToOtherProfile={toOtherProfile} />
+                  <OtherUsersProfile userList={userList} loggedInUser={loggedInUser} friendData={friendData} onToOtherProfile={toOtherProfile} postList={postList}/>
                 </Route>
                 <Route exact path='/group-page'>
                   <GroupPage userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile} groupClickedOn={groupClickedOn} />

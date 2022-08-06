@@ -1,7 +1,7 @@
 import Comments from "./Comments";
 import React, {useState} from "react";
 
-function Post({post, user, loggedInUser}) {
+function Post({post, loggedInUser}) {
     console.log(post)
     console.log(post.user.username)
     console.log(loggedInUser.username)
@@ -12,7 +12,6 @@ function Post({post, user, loggedInUser}) {
 
 
     function handleLike() {
-        console.log(user)
         console.log(post)
         console.log(loggedInUser.username)
         if (post.user.username === loggedInUser.username) {

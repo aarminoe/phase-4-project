@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import FriendsList from "./FriendsList"
+import Post from "./Post"
 
-function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser, onHandleSendingMessage}) {
+function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser, onHandleSendingMessage, postList}) {
 
     console.log(console.log(friendData))
 
@@ -120,6 +121,16 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser
                 </div>
                 <button onClick={handleOtherProfileFriends} >See Friends of {friendData ? friendData.username : null}</button>
                 {seeFriends ? <FriendsList clickedUserData={clickedUserData} userList={userList} onToOtherProfile={onToOtherProfile} setSeeFriends={setSeeFriends} seeFriends={seeFriends} /> : null}
+                <div>
+                    {`Posts from ${friendData.username}`}
+                    <div>
+                        {postList.map((post) => {
+                            if (post.user.username === friendData.username) {
+                                return <Post post={post} loggedInUser={loggedInUser} />
+                            }
+                        })}
+                    </div>
+                </div>
             </div>
         </div>
     )

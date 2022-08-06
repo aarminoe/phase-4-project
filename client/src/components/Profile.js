@@ -1,13 +1,15 @@
 import React, { useState } from "react"
 import FriendsList from "./FriendsList"
+import Post from "./Post"
 
 
-function Profile({loggedInUser, userList,onToOtherProfile}) {
+function Profile({loggedInUser, userList,onToOtherProfile, postList}) {
 
     const [pictureFile, setPictureFile] = useState(null)
     const [seeFriends, setSeeFriends] = useState(false)
     const [newBio, setNewBio] = useState('')
 
+    console.log(postList)
 
     function handlePictureFile(e) {
         setPictureFile(e.target.value)
@@ -49,6 +51,16 @@ function Profile({loggedInUser, userList,onToOtherProfile}) {
                 </div>
                 <button onClick={handleSeeFriends}>See Friends of {loggedInUser.username}</button>
                 {seeFriends ? <FriendsList loggedInUser={loggedInUser} userList={userList} onToOtherProfile={onToOtherProfile} setSeeFriends={setSeeFriends} seeFriends={seeFriends}/> : null}
+                <div>
+                    {`Posts from ${loggedInUser.username}`}
+                    <div>
+                        {postList.map((post) => {
+                            if (post.user.username === loggedInUser.username) {
+                                return <Post post={post} loggedInUser={loggedInUser} />
+                            }
+                        })}
+                    </div>
+                </div>
             </div>
         </div>
     )
