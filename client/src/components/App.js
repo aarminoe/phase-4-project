@@ -19,7 +19,6 @@ import Group from './Group';
 
 function App() {
 
-  const [userLoggedIn, setUserLoggedIn] = useState(false)
   const [userList, setUserList] = useState([])
   const [loggedInUser, setLoggedInUser] = useState(null)
   const [needProfile, setNeedProfile] = useState(false)
@@ -29,7 +28,6 @@ function App() {
   const [postList, setPostList] = useState([])
 
   function handleUserLogIn(user) {
-    setUserLoggedIn(true)
     setLoggedInUser(user)
   }
 
@@ -42,12 +40,13 @@ function App() {
     setFriendData(user)
   }
 
-  function handleNewPost() {
-
+  function handleNewPost(newPost) {
+    const updatedPostList = [...postList, newPost]
+    setPostList(updatedPostList)
   }
 
-  function toGroupPage(group) {
-    setGroupClickedOn(group)
+  function handleAddFriend(newFriend) {
+    
   }
 
   useEffect(() => {
@@ -100,10 +99,10 @@ function App() {
                   <Conversation userList={userList} loggedInUser={loggedInUser}/>
                 </Route>
                 <Route exact path='/groups'>
-                  <Groups userList={userList} groupList={groupList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile} onToGroupPage={toGroupPage} groupClickedOn ={groupClickedOn}/>
+                  <Groups userList={userList} groupList={groupList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile} />
                 </Route>
                 <Route exact path='/search'>
-                  <Search userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}/>
+                  <Search userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile} onHandleAddFriend={handleAddFriend}/>
                 </Route>
                 <Route exact path='/friends'>
                   <FriendsList userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}/>
@@ -112,7 +111,7 @@ function App() {
                   <OtherUsersProfile userList={userList} loggedInUser={loggedInUser} friendData={friendData} onToOtherProfile={toOtherProfile} postList={postList}/>
                 </Route>
                 <Route exact path='/group-page'>
-                  <GroupPage userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile} groupClickedOn={groupClickedOn} />
+                  <GroupPage userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}  />
                 </Route>
                 
               </Switch>

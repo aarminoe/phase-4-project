@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { NavLink } from "react-router-dom"
 
-function OneSearchedUser({user, loggedInUser, onToOtherProfile}) {
+function OneSearchedUser({user, loggedInUser, onToOtherProfile, onHandleAddFriend}) {
 
     const [friendAdded, setFriendAdded] = useState(false)
 
@@ -24,7 +24,7 @@ function OneSearchedUser({user, loggedInUser, onToOtherProfile}) {
         })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
+            onHandleAddFriend(data)
         })
     }
 

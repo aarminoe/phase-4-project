@@ -2,7 +2,7 @@
 
 
 function GroupMessages({message}) {
-    console.log(message)
+
     return (
         <div>
             <div>

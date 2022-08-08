@@ -21,10 +21,10 @@ class UsersController < ApplicationController
     end
     
     def update
-        user = User.find(session[:user_id])
+        user = User.find_by(id:params[:id])
         if user 
-            user.update(bio: params[:bio])
-            render json: user, status: :created
+            user.update(user_params)
+            render json: user
         else
             render json: { error: 'User not found' }, status: :not_found
         end

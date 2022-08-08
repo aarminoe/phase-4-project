@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   post "/log", to: "sessions#create"
+  delete '/logout', to: 'sessions#destroy'
   get "/me", to: "users#show"
   get '/posts', to: 'posts#index'
   

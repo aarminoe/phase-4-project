@@ -3,19 +3,16 @@ import GroupMember from "./GroupMember"
 import React, {useState} from "react"
 import GroupMessages from "./GroupMessages"
 
-function GroupPage({groupClickedOn, loggedInUser, onToOtherProfile}) {
-    console.log(groupClickedOn)
+function GroupPage({loggedInUser, onToOtherProfile, onAddGroupMessage, group}) {
+    
 
-    const [currentGroup, setCurrentGroup] = useState(null)
     const [seeGroupMembers, setSeeGroupMembers] = useState(false)
     const [userInGroup, setUserInGroup] = useState(false)
     const [newGroupMessage, setNewGroupMessage] = useState('')
     const [notInGroupError, setNotInGroupError] =useState(false)
+    const [groupMessages, setGroupMessages] = useState(group.group_messages)
 
     function handleJoinGroup() {
-        console.log(groupClickedOn.id)
-        console.log(loggedInUser.id)
-        setCurrentGroup(groupClickedOn)
         fetch(`/usergroups`, {
             method: 'POST',
             headers: {
@@ -23,7 +20,7 @@ function GroupPage({groupClickedOn, loggedInUser, onToOtherProfile}) {
             },
             body: JSON.stringify({
                 user_id: loggedInUser.id,
-                group_id: groupClickedOn.id
+                group_id: group.id
             })
         })
         .then(resp => resp.json())
@@ -32,7 +29,7 @@ function GroupPage({groupClickedOn, loggedInUser, onToOtherProfile}) {
 
     function handleSeeGroupUsers() {
         setSeeGroupMembers((seeGroupMembers) => !seeGroupMembers)
-        groupClickedOn.users.forEach((user) => {
+        group.users.forEach((user) => {
             if (user.username === loggedInUser.username) {
                 setUserInGroup(true)
             }
@@ -41,8 +38,6 @@ function GroupPage({groupClickedOn, loggedInUser, onToOtherProfile}) {
 
     function handleNewGroupMessage(e) {
         e.preventDefault()
-        loggedInUser.groups.forEach((group) => {
-            if (group.name === groupClickedOn.name) {
                 fetch('/group_messages', {
                     method: 'POST',
                     headers: {
@@ -51,24 +46,29 @@ function GroupPage({groupClickedOn, loggedInUser, onToOtherProfile}) {
                     body: JSON.stringify({
                         message: newGroupMessage,
                         user_id: loggedInUser.id,
-                        group_id: groupClickedOn.id,
+                        group_id: group.id,
                         sender_name: loggedInUser.username,
                         sender_avatar_url: loggedInUser.avatar_url
                     })
                 })
                 .then(resp => resp.json())
                 .then(data => {
-                    console.log(data)
+                    addGroupMessage(data)
                     setNewGroupMessage('')
                 })
-            }
-        })
+           
     }
+
+    function addGroupMessage(message) {
+        const updatedGroupMessages = [...group.group_messages, message]
+        setGroupMessages(updatedGroupMessages)
+    }
+    
 
 
     return (
         <p>
-            {groupClickedOn.name}
+            {group.name}
                 {seeGroupMembers ? 
                 <div>
                     <button  onClick={handleSeeGroupUsers}>Hide Members</button>
@@ -77,16 +77,19 @@ function GroupPage({groupClickedOn, loggedInUser, onToOtherProfile}) {
                     <button onClick={handleSeeGroupUsers}>See Members/Join Group</button>
                 </div>}
                 {!userInGroup && seeGroupMembers ?<button onClick={handleJoinGroup}>Join Group</button>:null }
-                {seeGroupMembers ? groupClickedOn.users.map((user) => {
+                {seeGroupMembers ? group.users.map((user) => {
                     return <GroupMember user={user} onToOtherProfile={onToOtherProfile}/>
                 })                
                 : null}
             <form onSubmit={handleNewGroupMessage}>
-                <input type='text' onChange={(e) => setNewGroupMessage(e.target.value)} value={newGroupMessage}></input>
-                <button>Send Message</button>
+                Must be in group to add messages!
+                <p>
+                    <input type='text' onChange={(e) => setNewGroupMessage(e.target.value)} value={newGroupMessage}></input>
+                    <button>Send Message</button>
+                </p>
             </form>
             <div>
-                {groupClickedOn.group_messages.map((message) => {
+                {groupMessages.map((message) => {
                     return <GroupMessages message={message}/>
                 })}
             </div>

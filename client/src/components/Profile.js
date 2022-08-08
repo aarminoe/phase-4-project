@@ -5,16 +5,10 @@ import Post from "./Post"
 
 function Profile({loggedInUser, userList,onToOtherProfile, postList}) {
 
-    const [pictureFile, setPictureFile] = useState(null)
     const [seeFriends, setSeeFriends] = useState(false)
     const [newBio, setNewBio] = useState('')
 
-    console.log(postList)
-
-    function handlePictureFile(e) {
-        setPictureFile(e.target.value)
-        console.log(e.target.value)
-    }
+    console.log(loggedInUser)
 
     function handleNewBio(e) {
         e.preventDefault()

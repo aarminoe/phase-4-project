@@ -20,7 +20,7 @@ function Home({userList, loggedInUser, onHandleNewPost, postList}) {
         })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
+            onHandleNewPost(data, loggedInUser)
             setPostText('')
         })
     }

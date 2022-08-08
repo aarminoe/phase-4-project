@@ -2,9 +2,7 @@ import Comments from "./Comments";
 import React, {useState} from "react";
 
 function Post({post, loggedInUser}) {
-    console.log(post)
-    console.log(post.user.username)
-    console.log(loggedInUser.username)
+ 
 
     const [editPost, setEditPost] = useState(false)
     const [editPostText, setEditPostText] = useState('')
