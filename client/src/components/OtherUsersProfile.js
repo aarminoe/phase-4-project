@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import FriendsList from "./FriendsList"
 import Post from "./Post"
 
-function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser, onHandleSendingMessage, postList}) {
+function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser, onHandleNewMessageState, postList, onHandleNewMessageInConversation}) {
 
     console.log(console.log(friendData))
 
@@ -48,7 +48,7 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser
                 })
             })
             .then(resp => resp.json())
-            .then(data => console.log(data))
+            .then(data => onHandleNewMessageInConversation(data))
         }
         else {
             fetch(`/users/${friendData.id}/conversations`, {
@@ -97,7 +97,7 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser
             })
         })
         .then(resp => resp.json())
-        .then(data => console.log(data))
+        .then(data => onHandleNewMessageState(data))
         
     }
 

@@ -26,6 +26,9 @@ function App() {
   const [groupList, setGroupList] = useState([])
   const [groupClickedOn, setGroupClickedOn] = useState(null)
   const [postList, setPostList] = useState([])
+  const [newMessageNewConversation, setNewMessageNewConversation] = useState(null)
+  const [newMessageHasConversation, setNewMessageHasConversation] = useState(null)
+  
 
   function handleUserLogIn(user) {
     setLoggedInUser(user)
@@ -47,6 +50,18 @@ function App() {
 
   function handleAddFriend(newFriend) {
     
+  }
+
+  function handleNewMessageState(newMessage) {
+    console.log(newMessage)
+    setNewMessageNewConversation(newMessage)
+    console.log(loggedInUser)
+  }
+
+  function handleNewMessageInConversation(newMessage) {
+    console.log(newMessage)
+    setNewMessageHasConversation(newMessage)
+    console.log(loggedInUser)
   }
 
   useEffect(() => {
@@ -96,7 +111,7 @@ function App() {
                   <Profile loggedInUser={loggedInUser} userList={userList} onToOtherProfile={toOtherProfile} postList={postList}/>
                 </Route>
                 <Route exact path='/messages'>
-                  <Conversation userList={userList} loggedInUser={loggedInUser}/>
+                  <Conversation userList={userList} loggedInUser={loggedInUser} newMessageNewConversation={newMessageNewConversation} newMessageHasConversation={newMessageHasConversation}/>
                 </Route>
                 <Route exact path='/groups'>
                   <Groups userList={userList} groupList={groupList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile} />
@@ -108,7 +123,7 @@ function App() {
                   <FriendsList userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}/>
                 </Route>
                 <Route exact path='/other-user-profile'>
-                  <OtherUsersProfile userList={userList} loggedInUser={loggedInUser} friendData={friendData} onToOtherProfile={toOtherProfile} postList={postList}/>
+                  <OtherUsersProfile userList={userList} loggedInUser={loggedInUser} friendData={friendData} onToOtherProfile={toOtherProfile} postList={postList} onHandleNewMessageState={handleNewMessageState} onHandleNewMessageInConversation={handleNewMessageInConversation}/>
                 </Route>
                 <Route exact path='/group-page'>
                   <GroupPage userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}  />

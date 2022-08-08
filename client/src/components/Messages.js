@@ -1,13 +1,14 @@
 import Message from "./Message"
 import React, { useState } from "react"
 
-function Messages({loggedInUser, conversation, userList}) {
+function Messages({loggedInUser, conversation, userList, newMessageNewConversation}) {
 
     console.log(conversation)
 
     const [replyMessage, setReplyMessage] = useState('')
     const [userToReplyTo, setUserToReplyTo] = useState(null)
     const [sentConversationData, setSentConversationData] = useState(null)
+    const [conversationMessages, setConversationMessages] = useState(conversation.messages)
 
 
 
@@ -32,7 +33,6 @@ function Messages({loggedInUser, conversation, userList}) {
 
     function handleReplyMessageSend(e) {
         e.preventDefault()
-
         console.log(conversation)
         console.log(sentConversationData)
         fetch(`/users/${userToReplyTo.id}/conversations/${sentConversationData}/messages`, {
@@ -48,6 +48,7 @@ function Messages({loggedInUser, conversation, userList}) {
         })
         .then(resp => resp.json())
         .then(data => console.log(data))
+
         fetch(`/users/${loggedInUser.id}/conversations/${conversation.id}/messages`, {
             method: 'POST',
             headers: {
@@ -60,18 +61,23 @@ function Messages({loggedInUser, conversation, userList}) {
             })
         })
         .then(resp => resp.json())
-        .then(data => console.log(data))
+        .then(data => newMessageInConversation(data))
         
+    }
+
+    function newMessageInConversation(newMessage) {
+        const updatedConversationMessages = [...conversationMessages, newMessage]
+        setConversationMessages(updatedConversationMessages)
     }
 
     
 
     return(
         <div>
-            {conversation.messages.map((message) => {
+            {conversationMessages.map((message) => {
                 return <Message message={message} loggedInUser={loggedInUser} userList={userList} conversation={conversation}/>
             })}
-            {conversation.messages[0] ? 
+            {conversationMessages[0] ? 
             <form onSubmit={handleReplyMessageSend}>
                 <input type='text' placeholder='Reply...' onChange={handleReplyMessage}></input>
                 <button>send</button>
