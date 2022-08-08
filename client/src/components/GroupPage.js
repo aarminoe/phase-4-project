@@ -3,16 +3,18 @@ import GroupMember from "./GroupMember"
 import React, {useState} from "react"
 import GroupMessages from "./GroupMessages"
 
-function GroupPage({loggedInUser, onToOtherProfile, onAddGroupMessage, group}) {
+function GroupPage({loggedInUser, onToOtherProfile, group}) {
     
-
+    console.log(group)
     const [seeGroupMembers, setSeeGroupMembers] = useState(false)
     const [userInGroup, setUserInGroup] = useState(false)
     const [newGroupMessage, setNewGroupMessage] = useState('')
     const [notInGroupError, setNotInGroupError] =useState(false)
     const [groupMessages, setGroupMessages] = useState(group.group_messages)
-
+    const [groupUsers, setGroupUsers] = useState(group.users)
+    console.log(group)
     function handleJoinGroup() {
+        console.log(group)
         fetch(`/usergroups`, {
             method: 'POST',
             headers: {
@@ -24,17 +26,13 @@ function GroupPage({loggedInUser, onToOtherProfile, onAddGroupMessage, group}) {
             })
         })
         .then(resp => resp.json())
-        .then(data => console.log(data))
-    }
-
-    function handleSeeGroupUsers() {
-        setSeeGroupMembers((seeGroupMembers) => !seeGroupMembers)
-        group.users.forEach((user) => {
-            if (user.username === loggedInUser.username) {
-                setUserInGroup(true)
-            }
+        .then(data => {
+            console.log(data)
+            handleJoinGroupNewUser(loggedInUser)
         })
     }
+
+    
 
     function handleNewGroupMessage(e) {
         e.preventDefault()
@@ -59,9 +57,23 @@ function GroupPage({loggedInUser, onToOtherProfile, onAddGroupMessage, group}) {
            
     }
 
+    function handleSeeGroupUsers() {
+        setSeeGroupMembers((seeGroupMembers) => !seeGroupMembers)
+        group.users.forEach((user) => {
+            if (user.username === loggedInUser.username) {
+                setUserInGroup(true)
+            }
+        })
+    }
+
     function addGroupMessage(message) {
         const updatedGroupMessages = [...group.group_messages, message]
         setGroupMessages(updatedGroupMessages)
+    }
+
+    function handleJoinGroupNewUser(newUser) {
+        const updatedGroupUsers = [...groupUsers, newUser]
+        setGroupUsers(updatedGroupUsers)
     }
     
 
@@ -77,7 +89,7 @@ function GroupPage({loggedInUser, onToOtherProfile, onAddGroupMessage, group}) {
                     <button onClick={handleSeeGroupUsers}>See Members/Join Group</button>
                 </div>}
                 {!userInGroup && seeGroupMembers ?<button onClick={handleJoinGroup}>Join Group</button>:null }
-                {seeGroupMembers ? group.users.map((user) => {
+                {seeGroupMembers ? groupUsers.map((user) => {
                     return <GroupMember user={user} onToOtherProfile={onToOtherProfile}/>
                 })                
                 : null}
@@ -90,7 +102,7 @@ function GroupPage({loggedInUser, onToOtherProfile, onAddGroupMessage, group}) {
             </form>
             <div>
                 {groupMessages.map((message) => {
-                    return <GroupMessages message={message}/>
+                    return <GroupMessages message={message} />
                 })}
             </div>
         </p>
