@@ -2,17 +2,19 @@ import React, { useState } from "react"
 import FriendsList from "./FriendsList"
 import Post from "./Post"
 
-function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser, onHandleNewMessageState, postList, onHandleNewMessageInConversation}) {
+function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser, onHandleNewMessageState, postList, onHandleNewMessageInConversation, hasConversationWith}) {
 
-    console.log(console.log(friendData))
+   console.log(friendData)
 
     const [seeFriends, setSeeFriends] = useState(false)
     const [clickedUserData, setClickedUserData] = useState(null)
     const [sendingMessage, setSendingMessage] = useState(false)
     const [message, setMessage] = useState('')
-    const [hasConversationWith, setHasConversationWith] = useState(false)
     const [conversationId, setConversationId] = useState(null)
+    const [loggedInUserConversations, setLoggedInUserConversations] = useState(loggedInUser.conversations)
    
+    console.log(hasConversationWith)
+    console.log(friendData)
 
     function handleOtherProfileFriends() {
         userList.forEach((user) => {
@@ -29,26 +31,30 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser
 
     function handleNewMessageSend(e) {
         e.preventDefault()
-        friendData.conversations.forEach((conversation) => {
-            if (conversation.conversation_with === loggedInUser.username) {
-                setHasConversationWith(true)
-                setConversationId(conversation.id)
-            }
-        })
-        if (hasConversationWith) {
-            fetch(`/users/${friendData.id}/conversations/${conversationId}/messages`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    message: message,
-                    who_messaged: loggedInUser.username,
-                    conversation_id: conversationId
+        console.log(friendData)
+        console.log(loggedInUser.conversations)
+        loggedInUser.conversations.forEach((conversation) => {
+            if (conversation.conversation_with === friendData.username) {
+                console.log('we have a conversation')
+                fetch(`/users/${friendData.id}/conversations/${conversation.id}/messages`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        who_messaged: loggedInUser.username,
+                        conversation_id: conversation.id
+                    })
                 })
-            })
-            .then(resp => resp.json())
-            .then(data => onHandleNewMessageInConversation(data))
+                .then(resp => resp.json())
+                .then(data => onHandleNewMessageInConversation(data))
+            }
+            return
+        })
+
+        if (hasConversationWith === friendData) {
+           console.log('whoa')
         }
         else {
             fetch(`/users/${friendData.id}/conversations`, {
@@ -64,7 +70,8 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser
             .then(resp => resp.json())
             .then(data => {
                 handleConversationMessage(data)
-                setHasConversationWith(true)
+
+                console.log('oh no!')
             })
             fetch(`/users/${loggedInUser.id}/conversations`, {
                 method: 'POST',
@@ -79,7 +86,7 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser
             .then(resp => resp.json())
             .then(data => {
                 handleConversationMessage(data)
-                setHasConversationWith(true)
+
             })        
         }
     }
@@ -122,13 +129,13 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser
                 <button onClick={handleOtherProfileFriends} >See Friends of {friendData ? friendData.username : null}</button>
                 {seeFriends ? <FriendsList clickedUserData={clickedUserData} userList={userList} onToOtherProfile={onToOtherProfile} setSeeFriends={setSeeFriends} seeFriends={seeFriends} /> : null}
                 <div>
-                    {`Posts from ${friendData.username}`}
+                    {friendData ? `Posts from ${friendData.username}` : null}
                     <div>
-                        {postList.map((post) => {
+                        {friendData ? postList.map((post) => {
                             if (post.user.username === friendData.username) {
                                 return <Post post={post} loggedInUser={loggedInUser} />
                             }
-                        })}
+                        }): null}
                     </div>
                 </div>
             </div>

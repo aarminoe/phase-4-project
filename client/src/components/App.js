@@ -28,6 +28,7 @@ function App() {
   const [postList, setPostList] = useState([])
   const [newMessageNewConversation, setNewMessageNewConversation] = useState(null)
   const [newMessageHasConversation, setNewMessageHasConversation] = useState(null)
+  const [hasConversationWith, setHasConversationWith] = useState(null)
   
 
   function handleUserLogIn(user) {
@@ -41,6 +42,13 @@ function App() {
 
   function toOtherProfile(user) {
     setFriendData(user)
+    loggedInUser.conversations.forEach((conversation) => {
+      console.log(conversation)
+      if (conversation.conversation_with === user.username) {
+        console.log(user.username)
+        setHasConversationWith(user)
+      }
+    })
   }
 
   function handleNewPost(newPost) {
@@ -123,7 +131,7 @@ function App() {
                   <FriendsList userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}/>
                 </Route>
                 <Route exact path='/other-user-profile'>
-                  <OtherUsersProfile userList={userList} loggedInUser={loggedInUser} friendData={friendData} onToOtherProfile={toOtherProfile} postList={postList} onHandleNewMessageState={handleNewMessageState} onHandleNewMessageInConversation={handleNewMessageInConversation}/>
+                  <OtherUsersProfile userList={userList} loggedInUser={loggedInUser} friendData={friendData} onToOtherProfile={toOtherProfile} postList={postList} onHandleNewMessageState={handleNewMessageState} onHandleNewMessageInConversation={handleNewMessageInConversation} hasConversationWith={hasConversationWith}/>
                 </Route>
                 <Route exact path='/group-page'>
                   <GroupPage userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}  />

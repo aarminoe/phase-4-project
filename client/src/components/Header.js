@@ -6,6 +6,11 @@ function Header() {
         fetch('/logout', {
             method: 'DELETE'
         })
+        .then(() => logOut())
+    }
+
+    function logOut() {
+        window.location.reload()
     }
 
     return(
