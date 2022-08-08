@@ -70,12 +70,19 @@ function Messages({loggedInUser, conversation, userList, newMessageNewConversati
         setConversationMessages(updatedConversationMessages)
     }
 
+    function handleDeleteMessage(deletedMessage) {
+        const updatedConversationMessages = conversationMessages.filter((message) => {
+            return message !== deletedMessage
+        })
+        setConversationMessages(updatedConversationMessages)
+    }
+
     
 
     return(
         <div>
             {conversationMessages.map((message) => {
-                return <Message message={message} loggedInUser={loggedInUser} userList={userList} conversation={conversation}/>
+                return <Message message={message} loggedInUser={loggedInUser} userList={userList} conversation={conversation} onHandleDeleteMessage={handleDeleteMessage}/>
             })}
             {conversationMessages[0] ? 
             <form onSubmit={handleReplyMessageSend}>
