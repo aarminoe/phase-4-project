@@ -6,26 +6,72 @@ function Post({post, loggedInUser}) {
 
     const [editPost, setEditPost] = useState(false)
     const [editPostText, setEditPostText] = useState('')
+    const [postLiked, setPostLiked] = useState(false)
+    const [currentPostLikes, setCurrentPostLikes] = useState(post.post_likes)
 
-
+    console.log(loggedInUser)
 
     function handleLike() {
-        console.log(post)
-        console.log(loggedInUser.username)
-        if (post.user.username === loggedInUser.username) {
-            console.log('hi')
+        let userFound = false
+        setPostLiked((postLiked) => !postLiked)
+        for (let i=0;i<currentPostLikes.length; i++) {
+            if (currentPostLikes[i].user_who_liked === loggedInUser.username) {
+                console.log('deleting like')
+                handleDeletePostLike(currentPostLikes[i])
+                userFound = true
+                fetch(`/users/${post.user.id}/posts/${post.id}/post_likes/${currentPostLikes[i].id}`, {
+                    method: 'DELETE'
+                })
+            }
         }
-        fetch(`/users/${post.user.id}/posts/${post.id}/post_likes`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                user_who_liked: loggedInUser.username,
+        if (userFound === false) {
+            console.log('adding like')
+            fetch(`/users/${post.user.id}/posts/${post.id}/post_likes`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    user_who_liked: loggedInUser.username,
+                })
             })
+            .then(resp => resp.json())
+            .then(like => handleAddPostLike(like))
+
+        }
+
+        // post.post_likes.forEach((like) => {
+        //     console.log(like)
+        //     if (like.user_who_liked === loggedInUser.username) {
+        //         console.log('is liked')
+        //         console.log(like)
+        //         fetch(`/users/${post.user.id}/posts/${post.id}/post_likes/${like.id}`, {
+        //             method: 'DELETE'
+        //         })
+        //         .then(setPostLiked((postLiked) => !postLiked))
+                
+        //     }
+        //     return
+        // })
+        // console.log(post)
+        // console.log(loggedInUser.username)
+        // if (postLiked === false) {
+        //     handleLikeFetch()
+        // }
+        
+
+    }
+
+    function handleAddPostLike(like) {
+        const updatedPostLikes = [...currentPostLikes, like]
+        setCurrentPostLikes(updatedPostLikes)
+    }
+
+    function handleDeletePostLike(deletedLike) {
+        const updatedPostLikes = currentPostLikes.filter((like) => {
+            return like !== deletedLike
         })
-        .then(resp => resp.json())
-        .then(d => console.log(d))
+        setCurrentPostLikes(updatedPostLikes)
     }
 
     function handleDeletePost() {
@@ -71,8 +117,8 @@ function Post({post, loggedInUser}) {
             Post {post.post}
             <button onClick={handleLike}>👍</button>
             <p className="who-liked">
-                {post.post_likes.length !== 0 && post.post_likes.length > 1 ? <p>{post.post_likes[0].user_who_liked} and {post.post_likes.length} other people liked this</p>: null}
-                {post.post_likes.length === 1 ? <p>{post.post_likes[0].user_who_liked} liked this</p>: null}
+                {currentPostLikes.length !== 0 && currentPostLikes.length > 1 ? <p>{currentPostLikes[currentPostLikes.length -1].user_who_liked} and {currentPostLikes.length} other people liked this</p>: null}
+                {currentPostLikes.length === 1 ? <p>{currentPostLikes[0].user_who_liked} liked this</p>: null}
                 <Comments post={post} loggedInUser={loggedInUser}/>
             </p>
         </div>

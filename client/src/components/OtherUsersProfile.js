@@ -53,10 +53,7 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser
             return
         })
 
-        if (hasConversationWith === friendData) {
-           console.log('whoa')
-        }
-        else {
+        if (hasConversationWith !== friendData) {
             fetch(`/users/${friendData.id}/conversations`, {
                 method: 'POST',
                 headers: {

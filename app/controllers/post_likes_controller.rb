@@ -5,6 +5,16 @@ class PostLikesController < ApplicationController
         render json: like 
     end
 
+    def destroy 
+        like = PostLike.find_by(id:params[:id])
+        if like
+            like.destroy 
+            head :no_content
+        else
+            render json: { error: 'Like not found' }, status: :not_found
+        end
+    end
+
     private 
 
     def postlike_params
