@@ -3,7 +3,7 @@ import FriendsList from "./FriendsList"
 import Post from "./Post"
 
 
-function Profile({loggedInUser, userList,onToOtherProfile, postList}) {
+function Profile({loggedInUser, userList,onToOtherProfile, postList, addedFriend}) {
 
     const [seeFriends, setSeeFriends] = useState(false)
     const [newBio, setNewBio] = useState('')
@@ -44,7 +44,7 @@ function Profile({loggedInUser, userList,onToOtherProfile, postList}) {
                     </form>}
                 </div>
                 <button onClick={handleSeeFriends}>See Friends of {loggedInUser.username}</button>
-                {seeFriends ? <FriendsList loggedInUser={loggedInUser} userList={userList} onToOtherProfile={onToOtherProfile} setSeeFriends={setSeeFriends} seeFriends={seeFriends}/> : null}
+                {seeFriends ? <FriendsList loggedInUser={loggedInUser} userList={userList} onToOtherProfile={onToOtherProfile} setSeeFriends={setSeeFriends} seeFriends={seeFriends} addedFriend={addedFriend}/> : null}
                 <div>
                     {`Posts from ${loggedInUser.username}`}
                     <div>

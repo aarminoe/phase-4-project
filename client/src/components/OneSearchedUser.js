@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { NavLink } from "react-router-dom"
 
-function OneSearchedUser({user, loggedInUser, onToOtherProfile, onHandleAddFriend}) {
+function OneSearchedUser({user, loggedInUser, onToOtherProfile, onHandleAddFriend, newFriend}) {
 
     const [friendAdded, setFriendAdded] = useState(false)
 
@@ -32,6 +32,7 @@ function OneSearchedUser({user, loggedInUser, onToOtherProfile, onHandleAddFrien
             .then(resp => resp.json())
             .then(data => {
                 onHandleAddFriend(data)
+                console.log(data)
             })
         }
     }
@@ -44,8 +45,9 @@ function OneSearchedUser({user, loggedInUser, onToOtherProfile, onHandleAddFrien
                 <img className="avatar" src={user.avatar_url}></img>
                 <NavLink onClick={() => onToOtherProfile(user)} exact to='/other-user-profile' >{user.username}</NavLink>
                 <p>{user.bio}</p>
-                <button onClick={handleAddFriend}>Add friend</button> 
-                {friendAdded ? 'Friend Added!' : null}           
+                {newFriend && newFriend.username === user.username || friendAdded ? null : <button onClick={handleAddFriend}>Add friend</button> }
+                {friendAdded ? 'Friend Added!' : null} 
+         
             </div>  }    
         </form>
     )

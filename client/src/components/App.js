@@ -30,6 +30,8 @@ function App() {
   const [newMessageHasConversation, setNewMessageHasConversation] = useState(null)
   const [hasConversationWith, setHasConversationWith] = useState(null)
   const [friendsList, setFriendsList] = useState([])
+  const [addedFriend, setAddedFriend] = useState([])
+  const [newFriend, setNewFriend] = useState(null)
   
 
   function handleUserLogIn(user) {
@@ -57,8 +59,10 @@ function App() {
     setPostList(updatedPostList.reverse())
   }
 
-  function handleAddFriend(newFriend) {
-    
+  function handleAddFriend(newFriendAdded) {
+    const updatedFriendList = [...loggedInUser.friends, newFriendAdded]
+    setAddedFriend(updatedFriendList)
+    setNewFriend(newFriendAdded)
   }
 
   function handleNewMessageState(newMessage) {
@@ -72,6 +76,8 @@ function App() {
     setNewMessageHasConversation(newMessage)
     console.log(loggedInUser)
   }
+  
+
 
   useEffect(() => {
     fetch('/me')
@@ -116,7 +122,7 @@ function App() {
                   <Home userList={userList} loggedInUser={loggedInUser} onHandleNewPost={handleNewPost} postList={postList}/> }
                 </Route>
                 <Route exact path='/profile'>
-                  <Profile loggedInUser={loggedInUser} userList={userList} onToOtherProfile={toOtherProfile} postList={postList}/>
+                  <Profile loggedInUser={loggedInUser} userList={userList} onToOtherProfile={toOtherProfile} postList={postList} addedFriend={addedFriend}/>
                 </Route>
                 <Route exact path='/messages'>
                   <Conversation userList={userList} loggedInUser={loggedInUser} newMessageNewConversation={newMessageNewConversation} newMessageHasConversation={newMessageHasConversation}/>
@@ -125,13 +131,13 @@ function App() {
                   <Groups userList={userList} groupList={groupList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile} />
                 </Route>
                 <Route exact path='/search'>
-                  <Search userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile} onHandleAddFriend={handleAddFriend}/>
+                  <Search userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile} onHandleAddFriend={handleAddFriend} newFriend={newFriend}/>
                 </Route>
                 <Route exact path='/friends'>
                   <FriendsList userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}/>
                 </Route>
                 <Route exact path='/other-user-profile'>
-                  <OtherUsersProfile userList={userList} loggedInUser={loggedInUser} friendData={friendData} onToOtherProfile={toOtherProfile} postList={postList} onHandleNewMessageState={handleNewMessageState} onHandleNewMessageInConversation={handleNewMessageInConversation} hasConversationWith={hasConversationWith}/>
+                  <OtherUsersProfile userList={userList} loggedInUser={loggedInUser} friendData={friendData} onToOtherProfile={toOtherProfile} postList={postList} onHandleNewMessageState={handleNewMessageState} onHandleNewMessageInConversation={handleNewMessageInConversation} hasConversationWith={hasConversationWith} onHandleAddFriend={handleAddFriend}/>
                 </Route>
                 <Route exact path='/group-page'>
                   <GroupPage userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}  />

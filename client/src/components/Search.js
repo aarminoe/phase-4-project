@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import SearchedUsers from "./SearchedUsers"
 
-function Search({userList, loggedInUser, onToOtherProfile, onHandleAddFriend}) {
+function Search({userList, loggedInUser, onToOtherProfile, onHandleAddFriend, newFriend}) {
 
     const [searchedUser, setSearchedUser] = useState('')
 
@@ -16,7 +16,7 @@ function Search({userList, loggedInUser, onToOtherProfile, onHandleAddFriend}) {
             Search
             <input type='text' onChange={handleSearch}></input>
             {searchedUser.length >= 1 ? userList.map((user) => {
-                return <SearchedUsers user={user} searchedUser={searchedUser} loggedInUser={loggedInUser} onToOtherProfile={onToOtherProfile} onHandleAddFriend={onHandleAddFriend}/>
+                return <SearchedUsers user={user} searchedUser={searchedUser} loggedInUser={loggedInUser} onToOtherProfile={onToOtherProfile} onHandleAddFriend={onHandleAddFriend} newFriend={newFriend}/>
             }) : null}
         </div>
     )

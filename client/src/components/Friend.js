@@ -23,9 +23,7 @@ function Friend({friend,userList,onToOtherProfile, setSeeFriends, loggedInUser, 
         })
     }
    
-    console.log(friend)
-    console.log(usersFriends)
-    console.log(userList)
+  
     return (
         <div>
             <img className="avatar" src={friend.avatar_url}></img>
