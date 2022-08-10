@@ -53,7 +53,7 @@ function App() {
 
   function handleNewPost(newPost) {
     const updatedPostList = [...postList, newPost]
-    setPostList(updatedPostList)
+    setPostList(updatedPostList.reverse())
   }
 
   function handleAddFriend(newFriend) {
@@ -96,7 +96,7 @@ function App() {
   useEffect(() => {
     fetch('/posts')
     .then(resp => resp.json())
-    .then(posts => setPostList(posts))
+    .then(posts => setPostList(posts.reverse()))
   },[])
 
 
