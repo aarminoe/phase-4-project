@@ -61,7 +61,10 @@ function Messages({loggedInUser, conversation, userList, newMessageNewConversati
             })
         })
         .then(resp => resp.json())
-        .then(data => newMessageInConversation(data))
+        .then(data => {
+            newMessageInConversation(data)
+            setReplyMessage('')
+        })
         
     }
 
@@ -86,7 +89,7 @@ function Messages({loggedInUser, conversation, userList, newMessageNewConversati
             })}
             {conversationMessages[0] ? 
             <form onSubmit={handleReplyMessageSend}>
-                <input type='text' placeholder='Reply...' onChange={handleReplyMessage}></input>
+                <input type='text' placeholder='Reply...' value={replyMessage} onChange={handleReplyMessage}></input>
                 <button>send</button>
             </form> : null}
         </div>

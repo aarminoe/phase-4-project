@@ -1,5 +1,6 @@
 class FriendsController < ApplicationController
-    
+
+
     def create 
         friend = Friend.create(friend_params)
         if friend.valid?
@@ -9,6 +10,15 @@ class FriendsController < ApplicationController
         end
     end
 
+    def destroy
+        friend = Friend.find_by(id:params[:id])
+        if friend 
+            friend.destroy
+            head :no_content
+        else
+            render json: { error: 'Friend not found' }, status: :not_found
+        end
+    end
 
     private
 

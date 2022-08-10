@@ -7,25 +7,33 @@ function OneSearchedUser({user, loggedInUser, onToOtherProfile, onHandleAddFrien
 
     function handleAddFriend(e) {
         e.preventDefault()
+        let areFriends = false
         setFriendAdded(true)
-        console.log(user.avatar_url)
-        fetch(`/users/${loggedInUser.id}/friends`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: user.username,
-                avatar_url: user.avatar_url,
-                bio: user.bio,
-                user_id: loggedInUser.id
+        for (let i=0;i<loggedInUser.friends.length; i++) {
+            if (loggedInUser.friends[i].username === user.username) {
+                console.log('we are friends')
+                areFriends = true
             }
-            )
-        })
-        .then(resp => resp.json())
-        .then(data => {
-            onHandleAddFriend(data)
-        })
+        }
+        if (areFriends === false) {
+            fetch(`/users/${loggedInUser.id}/friends`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: user.username,
+                    avatar_url: user.avatar_url,
+                    bio: user.bio,
+                    user_id: loggedInUser.id
+                }
+                )
+            })
+            .then(resp => resp.json())
+            .then(data => {
+                onHandleAddFriend(data)
+            })
+        }
     }
 
 
@@ -36,7 +44,8 @@ function OneSearchedUser({user, loggedInUser, onToOtherProfile, onHandleAddFrien
                 <img className="avatar" src={user.avatar_url}></img>
                 <NavLink onClick={() => onToOtherProfile(user)} exact to='/other-user-profile' >{user.username}</NavLink>
                 <p>{user.bio}</p>
-                <button onClick={handleAddFriend}>Add friend</button>              
+                <button onClick={handleAddFriend}>Add friend</button> 
+                {friendAdded ? 'Friend Added!' : null}           
             </div>  }    
         </form>
     )

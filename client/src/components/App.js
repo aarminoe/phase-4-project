@@ -29,6 +29,7 @@ function App() {
   const [newMessageNewConversation, setNewMessageNewConversation] = useState(null)
   const [newMessageHasConversation, setNewMessageHasConversation] = useState(null)
   const [hasConversationWith, setHasConversationWith] = useState(null)
+  const [friendsList, setFriendsList] = useState([])
   
 
   function handleUserLogIn(user) {
@@ -98,7 +99,6 @@ function App() {
     .then(resp => resp.json())
     .then(posts => setPostList(posts.reverse()))
   },[])
-
 
   if (loggedInUser) {
     if (loggedInUser.avatar_url) {

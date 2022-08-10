@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get "/me", to: "users#show"
   get '/posts', to: 'posts#index'
-  
+
   resources :groups do
     resources :users
   end

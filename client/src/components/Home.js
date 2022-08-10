@@ -26,17 +26,13 @@ function Home({userList, loggedInUser, onHandleNewPost, postList}) {
         })
     }
 
-    function handlePostTextChange(e) {
-        setPostText(e.target.value)
-    }
-
     console.log(postList)
     return(
         <div>
             <div>
                 {loggedInUser.username}
                 <form onSubmit={addNewPost}>
-                    <input type='text' placeholder="Whats on your mind?" value={postText} onChange={handlePostTextChange}></input>
+                    <input type='text' placeholder="Whats on your mind?" value={postText} onChange={(e) => {setPostText(e.target.value)}}></input>
                     <button>Add Post</button>
                 </form>
                 {postList.map((post) => {
