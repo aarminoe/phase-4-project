@@ -76,6 +76,20 @@ function App() {
     setNewMessageHasConversation(newMessage)
     console.log(loggedInUser)
   }
+
+  function handleEditPostState(edittedPost) {
+    const updatedPost = postList.map((post) => {
+      if (post.id === edittedPost.id) {
+        return {
+          ...post,
+          post: edittedPost.post
+        }
+      } else {
+        return post
+      }
+    })
+    setPostList(updatedPost)
+  }
   
 
 
@@ -119,7 +133,7 @@ function App() {
               <Switch>
                 <Route exact path='/'>
                   {needProfile ? <Redirect to='/profile' /> : 
-                  <Home userList={userList} loggedInUser={loggedInUser} onHandleNewPost={handleNewPost} postList={postList}/> }
+                  <Home userList={userList} loggedInUser={loggedInUser} onHandleNewPost={handleNewPost} postList={postList} onHandleEditPost={handleEditPostState}/> }
                 </Route>
                 <Route exact path='/profile'>
                   <Profile loggedInUser={loggedInUser} userList={userList} onToOtherProfile={toOtherProfile} postList={postList} addedFriend={addedFriend}/>

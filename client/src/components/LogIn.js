@@ -13,6 +13,7 @@ function LogIn({onHandleUserLogIn, setNeedProfile, onHandleNewUser, setLoggedInU
   const [newUser, setNewUser] = useState('')
   const [newPass, setNewPass] = useState('')
   const [confirmPass, setConfirmPass] = useState('')
+  const [newBio, setNewBio] = useState('')
   const [logInError, setLogInError] = useState(false)
   const [signUp, setSignUp] = useState(false)
   const [errorsFound, setErrorsFound] = useState(false)
@@ -44,7 +45,7 @@ function LogIn({onHandleUserLogIn, setNeedProfile, onHandleNewUser, setLoggedInU
 
   function handleNewUserSubmit(e) {
     e.preventDefault()
-    setSignUp(false)
+    
     toCreateProfile()
     fetch('/users', {
       method: 'POST',
@@ -55,20 +56,25 @@ function LogIn({onHandleUserLogIn, setNeedProfile, onHandleNewUser, setLoggedInU
         username: newUser,
         password: newPass,
         password_confirmation: confirmPass,
-        avatar_url: 'https://media.istockphoto.com/photos/businessman-silhouette-as-avatar-or-default-profile-picture-picture-id476085198?b=1&k=20&m=476085198&s=170667a&w=0&h=Ct4e1kIOdCOrEgvsQg4A1qeuQv944pPFORUQcaGw4oI='
+        avatar_url: 'https://media.istockphoto.com/photos/businessman-silhouette-as-avatar-or-default-profile-picture-picture-id476085198?b=1&k=20&m=476085198&s=170667a&w=0&h=Ct4e1kIOdCOrEgvsQg4A1qeuQv944pPFORUQcaGw4oI=',
+        bio: newBio
       })
     })
-    .then(resp => resp.json())
-    .then(createdUser => {
-      onHandleNewUser(createdUser)
-      setLoggedInUser(createdUser)
-      setNeedProfile(true)
-      console.log(createdUser.errors)
-      if (createdUser.errors) {
-        setErrorsFound(true)
-        setErrorList(createdUser.errors)
+    .then((r) => {
+      if (r.ok) {
+        r.json().then((createdUser) => { 
+          onHandleNewUser(createdUser)
+          setLoggedInUser(createdUser)
+          setNeedProfile(true)
+          console.log(createdUser.errors)})
+          setSignUp(false)
+      } else {
+        r.json().then((err) => {
+          setErrorList(err.errors)
+          setErrorsFound(true)
+        })
       }
-    })   
+    })
   }
 
   function toCreateProfile() {
@@ -98,8 +104,13 @@ function LogIn({onHandleUserLogIn, setNeedProfile, onHandleNewUser, setLoggedInU
               <input type='password' onChange={(e) => setNewPass(e.target.value)}></input> 
               <p>Confirm Password:</p>
               <input type='password' onChange={(e) => setConfirmPass(e.target.value)}></input>
-              <p></p>
-              <button>Sign up!</button>
+              <p>
+                Tell us something about you!
+              </p>
+              <textarea className="new-bio" onChange={(e) => setNewBio(e.target.value)} type='text' />
+              <p>
+                <button>Sign up!</button>
+              </p>
             </form>
             <div>
               {errorsFound ? errorList.map((e) => {
@@ -126,7 +137,7 @@ function LogIn({onHandleUserLogIn, setNeedProfile, onHandleNewUser, setLoggedInU
               <p>
                 Pass:
               </p>
-              <input onChange={(e) => setPass(e.target.value)} type='password' />
+              <input onChange={(e) => setPass(e.target.value)} type='password' /> 
               <p>
                 <button onClick={handleLogInError}>Log In!</button>
               </p>

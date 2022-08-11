@@ -13,14 +13,10 @@ function Message({message, loggedInUser, userList, conversation, onHandleDeleteM
         })
     }
     
-    function convo() {
-        console.log(conversation)
-    }
-
     return(
         <div>
             
-            <div onClick={convo}>
+            <div>
                 {conversation.conversation_with === message.who_messaged ? `${message.who_messaged} to ${loggedInUser.username}:` : `${message.who_messaged} to ${conversation.conversation_with}:`}
                 <p>
                     <button onClick={handleDeleteMessage}>🞭</button>

@@ -1,7 +1,7 @@
 import Comments from "./Comments";
 import React, {useState} from "react";
 
-function Post({post, loggedInUser}) {
+function Post({post, loggedInUser, onHandleEditPost}) {
  
 
     const [editPost, setEditPost] = useState(false)
@@ -14,7 +14,6 @@ function Post({post, loggedInUser}) {
 
     function handleLike() {
         let userFound = false
-        let whoLiked
         console.log(post.post_likes)
         setPostLiked((postLiked) => !postLiked)
         for (let i=0;i<currentPostLikes.length; i++) {
@@ -73,8 +72,8 @@ function Post({post, loggedInUser}) {
                 post: editPostText
             })
         })
-        .then(resp => resp.json)
-        .then(data => console.log(data))
+        .then(resp => resp.json())
+        .then(data => onHandleEditPost(data))
     }
     
     function handleEditPostClick() {
@@ -94,7 +93,6 @@ function Post({post, loggedInUser}) {
             </div>
         :null}
             {post.user.username == loggedInUser.username ? <button onClick={handleEditPostClick}>Edit Post</button>: null}
-            <p>{post.created_at}</p>
             Post {post.post}
             <button onClick={handleLike}>👍</button>
             <p className="who-liked">
