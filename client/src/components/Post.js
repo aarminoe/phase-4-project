@@ -10,9 +10,12 @@ function Post({post, loggedInUser}) {
     const [currentPostLikes, setCurrentPostLikes] = useState(post.post_likes)
 
     console.log(loggedInUser)
+    console.log(post)
 
     function handleLike() {
         let userFound = false
+        let whoLiked
+        console.log(post.post_likes)
         setPostLiked((postLiked) => !postLiked)
         for (let i=0;i<currentPostLikes.length; i++) {
             if (currentPostLikes[i].user_who_liked === loggedInUser.username) {
@@ -37,29 +40,7 @@ function Post({post, loggedInUser}) {
             })
             .then(resp => resp.json())
             .then(like => handleAddPostLike(like))
-
         }
-
-        // post.post_likes.forEach((like) => {
-        //     console.log(like)
-        //     if (like.user_who_liked === loggedInUser.username) {
-        //         console.log('is liked')
-        //         console.log(like)
-        //         fetch(`/users/${post.user.id}/posts/${post.id}/post_likes/${like.id}`, {
-        //             method: 'DELETE'
-        //         })
-        //         .then(setPostLiked((postLiked) => !postLiked))
-                
-        //     }
-        //     return
-        // })
-        // console.log(post)
-        // console.log(loggedInUser.username)
-        // if (postLiked === false) {
-        //     handleLikeFetch()
-        // }
-        
-
     }
 
     function handleAddPostLike(like) {

@@ -1,12 +1,13 @@
 import React, { useState } from "react"
 
-function Comment({comment, post, loggedInUser}) {
+function Comment({comment, post, loggedInUser, onHandleDeleteCommentState}) {
 
     function handleDeleteComment() {
-        console.log(comment)
+        onHandleDeleteCommentState(comment)
         fetch(`/users/${post.user.id}/posts/${post.id}/comments/${comment.id}`, {
             method: 'DELETE'
         })
+        
 
     }
 

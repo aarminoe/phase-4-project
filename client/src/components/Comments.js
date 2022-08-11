@@ -5,6 +5,7 @@ function Comments({post, loggedInUser}) {
 
     const [addedComment, setAddedComment] = useState('')
     const [seeComments, setSeeComments] = useState(false)
+    const [postComments, setPostComments] = useState(post.comments)
 
     function handleAddComment(e) {
         e.preventDefault()
@@ -22,9 +23,21 @@ function Comments({post, loggedInUser}) {
         })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
+            handleAddNewComment(data)
             setAddedComment('')
         })
+    }
+
+    function handleAddNewComment(newComment) {
+        const updatedComments = [...postComments, newComment]
+        setPostComments(updatedComments)
+    }
+
+    function handleDeleteCommentState(deletedComment) {
+        const updatedComments = postComments.filter((comment) => {
+            return comment !== deletedComment
+        })
+        setPostComments(updatedComments)
     }
 
     return (
@@ -33,11 +46,11 @@ function Comments({post, loggedInUser}) {
             <button onClick={() => setSeeComments((seeComments) => !seeComments)}>See Comments</button>
             {seeComments ? <form onSubmit={handleAddComment}>
                 <input type='text' value={addedComment} onChange={(e) => setAddedComment(e.target.value)}></input>
-                <button>Add Comment</button>
+                <button onClick={console.log(post)}>Add Comment</button>
             </form> 
             : null}
-            {seeComments ? post.comments.map((comment) => {
-                return <Comment comment={comment} post={post} loggedInUser={loggedInUser}/>
+            {seeComments ? postComments.map((comment) => {
+                return <Comment comment={comment} post={post} loggedInUser={loggedInUser} onHandleDeleteCommentState={handleDeleteCommentState}/>
             }): null}
         </div>
     )
