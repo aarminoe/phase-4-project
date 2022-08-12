@@ -123,9 +123,9 @@ function App() {
   if (loggedInUser) {
     if (loggedInUser.avatar_url) {
       return (
-        <div className='App-header'>
+        <div >
           <div>
-            <header>
+            <header className='head'>
               <Header loggedInUser={loggedInUser}/>
               <NavBar loggedInUser={loggedInUser}/>
             </header>

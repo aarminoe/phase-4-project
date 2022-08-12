@@ -63,11 +63,13 @@
   margin-top: 0px;
   top: 0px;
   position: relative;
+  font-size: x-large;
 }
 
 .header {
   margin-top: 25px;
   margin-left: 50px;
+
 }
 
 .logout-button {
@@ -75,7 +77,7 @@
   background-color: rgb(219, 221, 219);
   transition: 0.3s;
   margin-left: 375px;
-  top: 75px;
+  top: 50px;
   position: absolute;
 }
 
@@ -191,4 +193,36 @@ html, body {
 .home-add-post {
   margin-left: 50px;
   margin-top: 30px;
+}
+
+.posts-from {
+  margin-top: 25px;
+  margin-left: 50px;
+  font-size: large;
+}
+
+.profile-bio {
+  margin-top: 25px;
+  margin-left: 460px;
+  margin-bottom: 25px;
+}
+
+.see-friends {
+  margin-left: 40px;
+}
+
+.login-screen {
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+.login-text {
+  font-size: x-large;
+}
+
+.head {
+  background-color: rgb(152, 152, 255);
+  top: auto;
+  margin-top: -25px;
+  width: 100%;
 }

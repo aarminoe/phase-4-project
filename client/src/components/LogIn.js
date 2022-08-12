@@ -90,10 +90,7 @@ function LogIn({onHandleUserLogIn, setNeedProfile, onHandleNewUser, setLoggedInU
  
 
     return (
-    <header>
-        <p>
-          Welcome to Title!
-        </p>
+    <header className="login-screen">
         {signUp ? 
         <div>
           <div>
@@ -120,22 +117,21 @@ function LogIn({onHandleUserLogIn, setNeedProfile, onHandleNewUser, setLoggedInU
           </div>
           <Link
           onClick={() => {setSignUp(false)}}
-          className='navlink'
           exact to='/'
           activeStyle={{color: 'white'}}>Back to Log in</Link>
         </div> 
         :
           <div>
             <form onSubmit={handleSubmit}>
-              <p>
+              <p className="login-text">
                 Log In
               </p>
               <p>
-                User:
+                Username:
               </p>
                 <input onChange={(e) => setUser(e.target.value)} type='text' />
               <p>
-                Pass:
+                Password:
               </p>
               <input onChange={(e) => setPass(e.target.value)} type='password' /> 
               <p>
@@ -147,7 +143,6 @@ function LogIn({onHandleUserLogIn, setNeedProfile, onHandleNewUser, setLoggedInU
                 <p>
                   <Link 
                   onClick={() => {setSignUp(true)}}
-                  className='navlink'
                   exact to='/' 
                   activeStyle={{color: 'white'}}>Sign up!</Link>
                 </p>

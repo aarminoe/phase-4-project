@@ -34,19 +34,15 @@ function Profile({loggedInUser, userList,onToOtherProfile, postList, addedFriend
         <div>
             <img className='profile-avatar' src={loggedInUser.avatar_url}></img>
             <div>
-                <div>
-                    {loggedInUser.bio ? loggedInUser.bio : 
-                    <form onSubmit={handleNewBio}>
-                        <textarea placeholder="Share something about you!" className="new-bio" type='text' onChange={(e) => setNewBio(e.target.value)}/>
-                        <p>
-                            <button>Add Bio</button>
-                        </p>
-                    </form>}
+                <div className="profile-bio">
+                    {loggedInUser.bio ? loggedInUser.bio : null}
                 </div>
-                <button onClick={handleSeeFriends}>See Friends of {loggedInUser.username}</button>
+                <button className="see-friends" onClick={handleSeeFriends}>See Friends of {loggedInUser.username}</button>
                 {seeFriends ? <FriendsList loggedInUser={loggedInUser} userList={userList} onToOtherProfile={onToOtherProfile} setSeeFriends={setSeeFriends} seeFriends={seeFriends} addedFriend={addedFriend}/> : null}
                 <div>
-                    {`Posts from ${loggedInUser.username}`}
+                    <div className="posts-from">
+                        {`Posts from ${loggedInUser.username}`}
+                    </div>
                     <div>
                         {postList.map((post) => {
                             if (post.user.username === loggedInUser.username) {
