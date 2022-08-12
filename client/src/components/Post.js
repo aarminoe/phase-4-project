@@ -1,7 +1,7 @@
 import Comments from "./Comments";
 import React, {useState} from "react";
 
-function Post({post, loggedInUser, onHandleEditPost}) {
+function Post({post, loggedInUser, onHandleEditPost, onHandleDeletePost}) {
  
 
     const [editPost, setEditPost] = useState(false)
@@ -55,7 +55,7 @@ function Post({post, loggedInUser, onHandleEditPost}) {
     }
 
     function handleDeletePost() {
-        console.log(post.user)
+        onHandleDeletePost(post)
         fetch(`/users/${post.user.id}/posts/${post.id}`, {
             method: 'DELETE'
         })

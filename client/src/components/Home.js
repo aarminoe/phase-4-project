@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Post from "./Post";
 
 
-function Home({userList, loggedInUser, onHandleNewPost, postList, onHandleEditPost}) {
+function Home({userList, loggedInUser, onHandleNewPost, postList, onHandleEditPost, onHandleDeletePost}) {
     console.log(postList)
     const [postText, setPostText] = useState('')
     
@@ -37,7 +37,7 @@ function Home({userList, loggedInUser, onHandleNewPost, postList, onHandleEditPo
                     </form>
                 </div>
                 {postList.map((post) => {
-                    return  <Post post={post} loggedInUser={loggedInUser} onHandleEditPost={onHandleEditPost}/>
+                    return  <Post post={post} loggedInUser={loggedInUser} onHandleEditPost={onHandleEditPost} onHandleDeletePost={onHandleDeletePost}/>
                 })}
             </div>
         </div>

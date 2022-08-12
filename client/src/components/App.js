@@ -59,6 +59,13 @@ function App() {
     setPostList(updatedPostList.reverse())
   }
 
+  function handleDeletePost(deletedPost) {
+    const updatedPostList = postList.filter((post) => {
+      return post !== deletedPost
+    })
+    setPostList(updatedPostList)
+  }
+
   function handleAddFriend(newFriendAdded) {
     const updatedFriendList = [...loggedInUser.friends, newFriendAdded]
     setAddedFriend(updatedFriendList)
@@ -90,6 +97,8 @@ function App() {
     })
     setPostList(updatedPost)
   }
+
+  
   
 
 
@@ -132,7 +141,7 @@ function App() {
             <div className='App-header'>
               <Switch>
                 <Route exact path='/'>  
-                  <Home userList={userList} loggedInUser={loggedInUser} onHandleNewPost={handleNewPost} postList={postList} onHandleEditPost={handleEditPostState}/> 
+                  <Home userList={userList} loggedInUser={loggedInUser} onHandleNewPost={handleNewPost} postList={postList} onHandleEditPost={handleEditPostState} onHandleDeletePost={handleDeletePost}/> 
                 </Route>
                 <Route exact path='/profile'>
                   <Profile loggedInUser={loggedInUser} userList={userList} onToOtherProfile={toOtherProfile} postList={postList} addedFriend={addedFriend}/>
