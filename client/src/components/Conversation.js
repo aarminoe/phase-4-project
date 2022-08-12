@@ -7,7 +7,7 @@ function Conversation({loggedInUser, userList, newMessageNewConversation}) {
 
     return(
         <div>
-            <p className="messages-header">
+            <p className="conversations-header">
                 Conversations:
             </p>  
             {loggedInUser.conversations.map((conversation) => {
