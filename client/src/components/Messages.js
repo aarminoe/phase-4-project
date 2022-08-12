@@ -83,13 +83,13 @@ function Messages({loggedInUser, conversation, userList, newMessageNewConversati
     
 
     return(
-        <div>
+        <div className="conversation">
             {conversationMessages.map((message) => {
                 return <Message message={message} loggedInUser={loggedInUser} userList={userList} conversation={conversation} onHandleDeleteMessage={handleDeleteMessage}/>
             })}
             {conversationMessages[0] ? 
             <form onSubmit={handleReplyMessageSend}>
-                <input type='text' placeholder='Reply...' value={replyMessage} onChange={handleReplyMessage}></input>
+                <input className="reply-input" type='text' placeholder='Reply...' value={replyMessage} onChange={handleReplyMessage}></input>
                 <button>send</button>
             </form> : null}
         </div>

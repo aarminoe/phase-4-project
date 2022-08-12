@@ -79,7 +79,7 @@ function GroupPage({loggedInUser, onToOtherProfile, group}) {
 
 
     return (
-        <p>
+        <p className="single-group">
             {group.name}
                 {seeGroupMembers ? 
                 <div>

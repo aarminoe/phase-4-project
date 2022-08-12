@@ -97,6 +97,7 @@ function Post({post, loggedInUser, onHandleEditPost}) {
             :null}
                 {post.user.username == loggedInUser.username ? <button className="post-edit" onClick={handleEditPostClick}>🖉 </button>: null}
             </div>
+            <img className="avatar-group-member" src={loggedInUser.avatar_url}></img>
             <p className="post-username">{post.user.username} posted:</p>
             <p className="post-text">
             <button className="like-button" onClick={handleLike}>❤</button>            {post.post}

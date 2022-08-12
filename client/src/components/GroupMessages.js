@@ -4,11 +4,11 @@
 function GroupMessages({message}) {
 
     return (
-        <div>
+        <div className="group-message-card">
             <div>
                 <img className="avatar-group-member" src={message.sender_avatar_url}></img>
                 {message.sender_name}
-                <p>
+                <p className="group-message">
                     {message.message}
                 </p>
             </div> 

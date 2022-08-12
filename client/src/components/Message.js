@@ -14,15 +14,21 @@ function Message({message, loggedInUser, userList, conversation, onHandleDeleteM
     }
     
     return(
-        <div>
-            
-            <div>
-                {conversation.conversation_with === message.who_messaged ? `${message.who_messaged} to ${loggedInUser.username}:` : `${message.who_messaged} to ${conversation.conversation_with}:`}
-                <p>
-                    <button onClick={handleDeleteMessage}>🞭</button>
+        <div>          
+            <div className="message">
+                {conversation.conversation_with === message.who_messaged ?
+                <div className="message-header">
+                    {message.who_messaged} to {loggedInUser.username}:
+                </div>
+                 : 
+                 <div className="message-header">
+                    {message.who_messaged} to {conversation.conversation_with}:
+                 </div>
+                 }
+                <p >
+                    <button className="delete-message" onClick={handleDeleteMessage}>🞭</button>
                     {message.message}
-                </p>
-                
+                </p>         
             </div>
         </div>
     )

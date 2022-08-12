@@ -12,8 +12,8 @@ function Group({group, loggedInUser, onToOtherProfile, groupClickedOn}) {
     }
 
     return(
-        <div>
-            <button onClick={handleToGroupPage} exact to='/group-page' group={group}>{group.name}</button>
+        <div >
+            <button className="group-button" onClick={handleToGroupPage} exact to='/group-page' group={group}>{group.name}</button>
             {seeGroupPage ? <GroupPage group={group} groupClickedOn={groupClickedOn} loggedInUser={loggedInUser} onToOtherProfile={onToOtherProfile}/> : null}
         </div>
     )
