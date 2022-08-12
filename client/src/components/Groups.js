@@ -4,6 +4,9 @@ function Groups({groupList, loggedInUser, onToOtherProfile, onToGroupPage, group
     console.log(groupList)
     return( 
         <div>
+            <p className="messages-header">
+                Groups:
+            </p>
             {groupList.map((group) => {
                 return <Group group={group} loggedInUser={loggedInUser} onToOtherProfile={onToOtherProfile} onToGroupPage={onToGroupPage} groupClickedOn={groupClickedOn}/>
             })}

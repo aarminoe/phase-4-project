@@ -12,6 +12,7 @@ function FriendsList({loggedInUser, userList, onToOtherProfile, clickedUserData,
         setLoggedInUserFriends(updatedFriendList)
     }
     console.log(addedFriend)
+    console.log(clickedUserData)
 
     return (
         <div>
@@ -20,11 +21,12 @@ function FriendsList({loggedInUser, userList, onToOtherProfile, clickedUserData,
                 return <Friend friend={friend} onToOtherProfile={onToOtherProfile} userList={userList} setSeeFriends={setSeeFriends} seeFriends={seeFriends} loggedInUser={loggedInUser} onHandleDeleteFriend={handleDeleteFriend}/>
             })
             :  null }
-            {addedFriend[0] ? addedFriend.map((friend) => {
+            {addedFriend && !clickedUserData ? addedFriend.map((friend) => {
                 return <Friend friend={friend} onToOtherProfile={onToOtherProfile} userList={userList} setSeeFriends={setSeeFriends} seeFriends={seeFriends} loggedInUser={loggedInUser} onHandleDeleteFriend={handleDeleteFriend}/>
-            }) : loggedInUserFriends.map((friend) => {
+            }) : null} 
+            {!clickedUserData && !addedFriend[0] ? loggedInUserFriends.map((friend) => {
                 return <Friend friend={friend} onToOtherProfile={onToOtherProfile} userList={userList} setSeeFriends={setSeeFriends} seeFriends={seeFriends} loggedInUser={loggedInUser} onHandleDeleteFriend={handleDeleteFriend}/>
-            })}
+            }):null}
             
         </div>
     )

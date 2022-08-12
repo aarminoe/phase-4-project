@@ -39,7 +39,7 @@ function OneSearchedUser({user, loggedInUser, onToOtherProfile, onHandleAddFrien
 
 
     return (
-        <form>
+        <form className="one-searched-user">
             {loggedInUser.username == user.username ? null : 
             <div>
                 <img className="avatar" src={user.avatar_url}></img>

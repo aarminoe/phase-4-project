@@ -153,13 +153,13 @@ function App() {
                   <Groups userList={userList} groupList={groupList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile} />
                 </Route>
                 <Route exact path='/search'>
-                  <Search userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile} onHandleAddFriend={handleAddFriend} newFriend={newFriend}/>
+                  <Search userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile} onHandleAddFriend={handleAddFriend} newFriend={newFriend} addedFriend={addedFriend}/>
                 </Route>
                 <Route exact path='/friends'>
                   <FriendsList userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}/>
                 </Route>
                 <Route exact path='/other-user-profile'>
-                  <OtherUsersProfile userList={userList} loggedInUser={loggedInUser} friendData={friendData} onToOtherProfile={toOtherProfile} postList={postList} onHandleNewMessageState={handleNewMessageState} onHandleNewMessageInConversation={handleNewMessageInConversation} hasConversationWith={hasConversationWith} onHandleAddFriend={handleAddFriend}/>
+                  <OtherUsersProfile userList={userList} loggedInUser={loggedInUser} friendData={friendData} onToOtherProfile={toOtherProfile} postList={postList} onHandleNewMessageState={handleNewMessageState} onHandleNewMessageInConversation={handleNewMessageInConversation} hasConversationWith={hasConversationWith} onHandleAddFriend={handleAddFriend} addedFriend={addedFriend} />
                 </Route>
                 <Route exact path='/group-page'>
                   <GroupPage userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}  />

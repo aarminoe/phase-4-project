@@ -80,7 +80,7 @@
   background-color: rgb(219, 221, 219);
   transition: 0.3s;
   margin-left: 375px;
-  top: 50px;
+  top: 60px;
   position: absolute;
 }
 
@@ -181,9 +181,6 @@ html, body {
   font-size: large;
 }
 
-.comments-card {
-
-}
 
 .comment {
   font-size: medium;
@@ -235,8 +232,8 @@ html, body {
 }
 
 .group-button {
-  margin-top: 20px;
-  margin-left: 20px;
+  margin-top: 40px;
+  margin-left: 40px;
   width: 200px;
   height: 50px;
   border-radius: 10px;
@@ -285,6 +282,34 @@ html, body {
 
 .conversation {
   border-style: groove;
+  margin-left: 40px;
+  margin-top: 40px;
+}
+
+.search {
   margin-left: 20px;
   margin-top: 20px;
+}
+
+.one-searched-user {
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+.message-icon {
+  margin-left: 10px;
+}
+
+.other-users-data {
+  margin-left: 40px;
+}
+
+.search-bar {
+  margin-left: 10px;
+}
+
+.messages-header {
+  font-size: x-large;
+  margin-left: 40px;
+  margin-bottom: -30px;
 }

@@ -13,8 +13,6 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser
     const [conversationId, setConversationId] = useState(null)
     const [loggedInUserConversations, setLoggedInUserConversations] = useState(loggedInUser.conversations)
    
-    console.log(hasConversationWith)
-    console.log(friendData)
 
     function handleOtherProfileFriends() {
         userList.forEach((user) => {
@@ -107,25 +105,29 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser
 
     return (
         <div>
+            <p className="messages-header">
+                {friendData.username}
+            </p>
             {friendData ? <img className='profile-avatar' src={friendData.avatar_url}></img> : null}
             <div>
-                {friendData? friendData.username : null}
-                <button className="message-icon" onClick={handleNewMessageClick}>🖂</button>
-                <div>
-                    {sendingMessage ?
-                    <form onSubmit={handleNewMessageSend}>
-                        <input type='text' onChange={(e) => setMessage(e.target.value)}></input>
-                        <button>Send</button> 
-                    </form> 
-                    : null}
-                    
+                <div className="other-users-data">
+                    {friendData? friendData.username : null}
+                    <button className="message-icon" onClick={handleNewMessageClick}>🖂</button>
+                    <div>
+                        {sendingMessage ?
+                        <form onSubmit={handleNewMessageSend}>
+                            <input type='text' onChange={(e) => setMessage(e.target.value)}></input>
+                            <button>Send</button> 
+                        </form> 
+                        : null}                   
+                    </div>
+                    <div className="profile-bio">
+                        {friendData ? friendData.bio : null}
+                    </div>
                 </div>
-                <div>
-                    {friendData ? friendData.bio : null}
-                </div>
-                <button onClick={handleOtherProfileFriends} >See Friends of {friendData ? friendData.username : null}</button>
-                {seeFriends ? <FriendsList clickedUserData={clickedUserData} userList={userList} onToOtherProfile={onToOtherProfile} setSeeFriends={setSeeFriends} seeFriends={seeFriends} /> : null}
-                <div>
+                <button className="see-friends" onClick={handleOtherProfileFriends} >See Friends of {friendData ? friendData.username : null}</button>
+                {seeFriends ? <FriendsList  clickedUserData={clickedUserData} userList={userList} onToOtherProfile={onToOtherProfile} setSeeFriends={setSeeFriends} seeFriends={seeFriends} loggedInUser={loggedInUser}/> : null}
+                <div className="posts-from">
                     {friendData ? `Posts from ${friendData.username}` : null}
                     <div>
                         {friendData ? postList.map((post) => {
