@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-function Header() {
+function Header({loggedInUser}) {
 
     function handleLogout() {
         fetch('/logout', {
@@ -14,10 +14,10 @@ function Header() {
     }
 
     return(
-        <div>
-            <header>Header</header>
+        <div className="header">
+            <header className="header-title">Socializer</header>
             <h1>
-                <button onClick={handleLogout}>Logout</button>
+                <button className="logout-button" onClick={handleLogout}>Logout</button>
             </h1>
 
         </div>

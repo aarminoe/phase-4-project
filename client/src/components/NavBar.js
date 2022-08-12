@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-function NavBar() {
+function NavBar({loggedInUser}) {
 
 
     return (
@@ -9,23 +9,23 @@ function NavBar() {
             <NavLink 
             className='navlink' 
             exact to='/' 
-            activeStyle={{color: 'black'}}>Home</NavLink>
+            activeStyle={{color: 'black'}}>🏠</NavLink>
             <NavLink 
             className='navlink'
             exact to='/profile' 
-            activeStyle={{color: 'black'}}>Profile</NavLink>
+            activeStyle={{color: 'black'}}>👤</NavLink>
             <NavLink 
             className='navlink'
             exact to='/groups' 
-            activeStyle={{color: 'black'}}>Groups</NavLink>
+            activeStyle={{color: 'black'}}>👥</NavLink>
             <NavLink 
             className='navlink'
             exact to='/messages' 
-            activeStyle={{color: 'black'}}>Messages</NavLink>
+            activeStyle={{color: 'black'}}>🗪</NavLink>
             <NavLink 
             className='navlink'
-            exact to='/search' 
-            activeStyle={{color: 'black'}}>Search</NavLink>
+            to='/search' 
+>🔍</NavLink>
        </div> 
     )
 }

@@ -1,8 +1,16 @@
 
 
 .navlink {
-  color: red
+  margin-left: 50px;
+  align-items: center;
+  font-size: x-large;
+  transition: .3s;
 }
+
+.navlink:hover {
+  background-color: rgb(219, 221, 219);
+}
+
 
 .signup-errors {
   font-size: small;
@@ -11,19 +19,17 @@
 
 
 .post-card {
-  background-color: green;
+  background-color: rgb(219, 221, 219);
   margin-top: 40px;
   font-size: large;
+  margin: auto;
+  margin-left: 150px;
+  width: 800px;
+  border-radius: 10px;
+  margin-top: 25px;
+  position: relative
 }
 
-.comments-card {
-
-}
-
-.comment {
-  font-size: medium;
-  
-}
 
 .who-liked {
   font-size: small;
@@ -51,4 +57,138 @@
   margin-top: 50px;
   border-radius: 50%;
   width: 35px;
+}
+
+.header-title {
+  margin-top: 0px;
+  top: 0px;
+  position: relative;
+}
+
+.header {
+  margin-top: 25px;
+  margin-left: 50px;
+}
+
+.logout-button {
+  color: black;
+  background-color: rgb(219, 221, 219);
+  transition: 0.3s;
+  margin-left: 375px;
+  top: 75px;
+  position: absolute;
+}
+
+.logout-button:hover {
+  color: white;
+  background-color: rgb(245, 99, 99);
+}
+
+.App-header {
+  max-width: fit-content;
+  overflow-x: hidden;
+}
+
+.post-username {
+  font-size: medium;
+  margin-left: 10px;
+}
+
+.post-text {
+  margin-left: 20px;
+}
+
+.post-delete {
+  width: 30px;
+  height: 30px;
+  font-size: small;
+  top: 5px;
+  left: 765px;
+  position: absolute;
+  border-radius: 10px;
+  transition: .3s;
+}
+
+.post-delete:hover {
+  color: white;
+  background-color: rgb(245, 99, 99);
+}
+
+.post-edit {
+  width: 30px;
+  height: 30px;
+  font-size: small;
+  top: 5px;
+  left: 735px;
+  position: absolute;
+  border-radius: 10px;
+  transition: .3s;
+}
+
+.post-edit:hover {
+  color: white;
+  background-color: black;
+}
+
+.post-edit-input {
+  margin-left: 485px;
+  top: 5px;
+  position: absolute;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.like-button {
+  transition: .3s;
+}
+
+.like-button:hover {
+  color: green;
+}
+
+.who-liked {
+  margin-left: 5px;
+}
+
+.see-comments {
+  margin-bottom: 10px;
+}
+
+.comment-delete {
+  width: 30px;
+  height: 30px;
+  font-size: small;
+  margin-right:10px;
+  border-radius: 10px;
+  transition: .3s;
+}
+
+.comment-delete:hover {
+  color: white;
+  background-color: rgb(245, 99, 99);
+}
+
+.who-commented {
+  margin-top: 5px;
+  font-size: large;
+}
+
+.comments-card {
+
+}
+
+.comment {
+  font-size: medium;
+  margin-top: 5px;
+  border-style: groove;
+  border-radius: 10px;
+  width: 785px;
+}
+
+.home-add-post {
+  margin-left: 50px;
+  margin-top: 30px;
 }

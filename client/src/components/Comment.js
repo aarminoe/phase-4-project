@@ -13,13 +13,11 @@ function Comment({comment, post, loggedInUser, onHandleDeleteCommentState}) {
 
     return(
         <div className="comment">
-            <p>{comment.who_commented} commented:</p>
+            <p className="who-commented">{comment.who_commented} commented:</p>
             {post.user.username === loggedInUser.username || loggedInUser.username === comment.who_commented ?
-            <button onClick={handleDeleteComment}>X</button> : null
+            <button className="comment-delete" onClick={handleDeleteComment}>X</button> : null
             }
-            
-
-            Comment {comment.comment}
+            {comment.comment}
         </div>
     )
 }

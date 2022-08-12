@@ -126,14 +126,13 @@ function App() {
         <div className='App-header'>
           <div>
             <header>
-              <Header />
-              <NavBar needProfile={needProfile} />
+              <Header loggedInUser={loggedInUser}/>
+              <NavBar loggedInUser={loggedInUser}/>
             </header>
-            <div>
+            <div className='App-header'>
               <Switch>
-                <Route exact path='/'>
-                  {needProfile ? <Redirect to='/profile' /> : 
-                  <Home userList={userList} loggedInUser={loggedInUser} onHandleNewPost={handleNewPost} postList={postList} onHandleEditPost={handleEditPostState}/> }
+                <Route exact path='/'>  
+                  <Home userList={userList} loggedInUser={loggedInUser} onHandleNewPost={handleNewPost} postList={postList} onHandleEditPost={handleEditPostState}/> 
                 </Route>
                 <Route exact path='/profile'>
                   <Profile loggedInUser={loggedInUser} userList={userList} onToOtherProfile={toOtherProfile} postList={postList} addedFriend={addedFriend}/>

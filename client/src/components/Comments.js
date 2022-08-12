@@ -43,10 +43,10 @@ function Comments({post, loggedInUser}) {
     return (
         
         <div className="comments-card">
-            <button onClick={() => setSeeComments((seeComments) => !seeComments)}>See Comments</button>
+            <button className="see-comments" onClick={() => setSeeComments((seeComments) => !seeComments)}>See Comments</button>
             {seeComments ? <form onSubmit={handleAddComment}>
                 <input type='text' value={addedComment} onChange={(e) => setAddedComment(e.target.value)}></input>
-                <button onClick={console.log(post)}>Add Comment</button>
+                <button className="see-comments" onClick={console.log(post)}>Add Comment</button>
             </form> 
             : null}
             {seeComments ? postComments.map((comment) => {

@@ -73,7 +73,10 @@ function Post({post, loggedInUser, onHandleEditPost}) {
             })
         })
         .then(resp => resp.json())
-        .then(data => onHandleEditPost(data))
+        .then(data => {
+            onHandleEditPost(data)
+            setEditPostText('')
+        })
     }
     
     function handleEditPostClick() {
@@ -82,22 +85,26 @@ function Post({post, loggedInUser, onHandleEditPost}) {
 
     return (
         <div className="post-card">
-            <p>{post.user.username} posted:</p>
-            {post.user.username == loggedInUser.username ? <button onClick={handleDeletePost}>X</button> : null}
-            {editPost ? 
             <div>
-                <form onSubmit={handleEditPost}>
-                    <input type='text' onChange={(e) => setEditPostText(e.target.value)}></input>
-                    <button>Add Edit</button>
-                </form>
+                {post.user.username == loggedInUser.username ? <button  className="post-delete" onClick={handleDeletePost}>X</button> : null}
+                {editPost ? 
+                <div>
+                    <form onSubmit={handleEditPost} className="post-edit-input">
+                        <input type='text' value={editPostText} onChange={(e) => setEditPostText(e.target.value)}></input>
+                        <button>Add Edit</button>
+                    </form>
+                </div>
+            :null}
+                {post.user.username == loggedInUser.username ? <button className="post-edit" onClick={handleEditPostClick}>🖉 </button>: null}
             </div>
-        :null}
-            {post.user.username == loggedInUser.username ? <button onClick={handleEditPostClick}>Edit Post</button>: null}
-            Post {post.post}
-            <button onClick={handleLike}>👍</button>
+            <p className="post-username">{post.user.username} posted:</p>
+            <p className="post-text">
+            <button className="like-button" onClick={handleLike}>❤</button>            {post.post}
+            </p>
+            
             <p className="who-liked">
-                {currentPostLikes.length !== 0 && currentPostLikes.length > 1 ? <p>{currentPostLikes[currentPostLikes.length -1].user_who_liked} and {currentPostLikes.length} other people liked this</p>: null}
-                {currentPostLikes.length === 1 ? <p>{currentPostLikes[0].user_who_liked} liked this</p>: null}
+                {currentPostLikes.length !== 0 && currentPostLikes.length > 1 ? <p className="who-liked">{currentPostLikes[currentPostLikes.length -1].user_who_liked} and {currentPostLikes.length} other people liked this</p>: null}
+                {currentPostLikes.length === 1 ? <p className="who-liked">{currentPostLikes[0].user_who_liked} liked this</p>: null}
                 <Comments post={post} loggedInUser={loggedInUser}/>
             </p>
         </div>
