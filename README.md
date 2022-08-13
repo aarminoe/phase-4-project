@@ -1,4 +1,4 @@
-# Socializer
+# My Clique
 
 ## Description
 
