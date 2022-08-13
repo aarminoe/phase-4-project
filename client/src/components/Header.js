@@ -15,7 +15,7 @@ function Header({loggedInUser}) {
 
     return(
         <div className="header">
-            <header className="header-title">Socializer</header>
+            <header className="header-title">My Clique</header>
             <h1>
                 <button className="logout-button" onClick={handleLogout}>Logout</button>
             </h1>

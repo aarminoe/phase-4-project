@@ -99,7 +99,10 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser
             })
         })
         .then(resp => resp.json())
-        .then(data => onHandleNewMessageState(data))
+        .then(data => {
+            onHandleNewMessageState(data)
+            setMessage('')
+        })
         
     }
 
@@ -116,7 +119,7 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser
                     <div>
                         {sendingMessage ?
                         <form onSubmit={handleNewMessageSend}>
-                            <input type='text' onChange={(e) => setMessage(e.target.value)}></input>
+                            <input value={message} type='text' onChange={(e) => setMessage(e.target.value)}></input>
                             <button>Send</button> 
                         </form> 
                         : null}                   
