@@ -5,8 +5,6 @@ import OtherUsersProfile from "./OtherUsersProfile"
 
 function Friend({friend,userList,onToOtherProfile, setSeeFriends, loggedInUser, onHandleDeleteFriend}) {
 
-    const [usersFriends, setUsersFriends] = useState([])
-
     function handleFriendProfile() {
         userList.forEach((user) => {
             if (user.username === friend.username) {

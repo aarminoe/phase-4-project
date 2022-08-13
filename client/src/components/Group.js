@@ -1,6 +1,4 @@
 import React, { useState } from "react"
-import GroupMember from "./GroupMember"
-import { NavLink } from "react-router-dom"
 import GroupPage from "./GroupPage"
 
 function Group({group, loggedInUser, onToOtherProfile, groupClickedOn}) {

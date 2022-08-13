@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Post from "./Post";
 
 
-function Home({userList, loggedInUser, onHandleNewPost, postList, onHandleEditPost, onHandleDeletePost}) {
+function Home({loggedInUser, onHandleNewPost, postList, onHandleEditPost, onHandleDeletePost}) {
     console.log(postList)
     const [postText, setPostText] = useState('')
     

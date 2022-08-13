@@ -12,7 +12,7 @@ import Search from './Search';
 import FriendsList from './FriendsList';
 import OtherUsersProfile from './OtherUsersProfile';
 import Conversation from './Conversation';
-import Group from './Group';
+
 
 
 
@@ -21,15 +21,12 @@ function App() {
 
   const [userList, setUserList] = useState([])
   const [loggedInUser, setLoggedInUser] = useState(null)
-  const [needProfile, setNeedProfile] = useState(false)
   const [friendData, setFriendData] = useState(null)
   const [groupList, setGroupList] = useState([])
-  const [groupClickedOn, setGroupClickedOn] = useState(null)
   const [postList, setPostList] = useState([])
   const [newMessageNewConversation, setNewMessageNewConversation] = useState(null)
   const [newMessageHasConversation, setNewMessageHasConversation] = useState(null)
   const [hasConversationWith, setHasConversationWith] = useState(null)
-  const [friendsList, setFriendsList] = useState([])
   const [addedFriend, setAddedFriend] = useState([])
   const [newFriend, setNewFriend] = useState(null)
   
@@ -98,7 +95,11 @@ function App() {
     setPostList(updatedPost)
   }
 
-  
+  function handleNewGroup (newGroup) {
+    console.log(newGroup)
+    const updatedGroupList = [...groupList, newGroup]
+    setGroupList(updatedGroupList)
+  }
   
 
 
@@ -150,7 +151,7 @@ function App() {
                   <Conversation userList={userList} loggedInUser={loggedInUser} newMessageNewConversation={newMessageNewConversation} newMessageHasConversation={newMessageHasConversation}/>
                 </Route>
                 <Route exact path='/groups'>
-                  <Groups userList={userList} groupList={groupList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile} />
+                  <Groups userList={userList} groupList={groupList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile} onHandleNewGroup={handleNewGroup}/>
                 </Route>
                 <Route exact path='/search'>
                   <Search userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile} onHandleAddFriend={handleAddFriend} newFriend={newFriend} addedFriend={addedFriend}/>
@@ -186,7 +187,7 @@ function App() {
   else {
       return(
     <div>
-    <LogIn setNeedProfile={setNeedProfile} onHandleUserLogIn={handleUserLogIn} userList={userList} onHandleNewUser={handleNewUser} setLoggedInUser={setLoggedInUser} loggedInUser={loggedInUser}/>
+    <LogIn onHandleUserLogIn={handleUserLogIn} userList={userList} onHandleNewUser={handleNewUser} setLoggedInUser={setLoggedInUser} loggedInUser={loggedInUser}/>
   </div> 
       )
   }

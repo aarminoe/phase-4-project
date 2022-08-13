@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-function Header({loggedInUser}) {
+function Header() {
 
     function handleLogout() {
         fetch('/logout', {

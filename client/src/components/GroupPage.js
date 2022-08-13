@@ -9,7 +9,6 @@ function GroupPage({loggedInUser, onToOtherProfile, group}) {
     const [seeGroupMembers, setSeeGroupMembers] = useState(false)
     const [userInGroup, setUserInGroup] = useState(false)
     const [newGroupMessage, setNewGroupMessage] = useState('')
-    const [notInGroupError, setNotInGroupError] =useState(false)
     const [groupMessages, setGroupMessages] = useState(group.group_messages)
     const [groupUsers, setGroupUsers] = useState(group.users)
     console.log(group)
