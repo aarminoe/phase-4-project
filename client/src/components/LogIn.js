@@ -14,10 +14,12 @@ function LogIn({onHandleUserLogIn, setNeedProfile, onHandleNewUser, setLoggedInU
   const [newPass, setNewPass] = useState('')
   const [confirmPass, setConfirmPass] = useState('')
   const [newBio, setNewBio] = useState('')
+  const [newAvatarUrl, setNewAvatarUrl] = useState('')
   const [logInError, setLogInError] = useState(false)
   const [signUp, setSignUp] = useState(false)
   const [errorsFound, setErrorsFound] = useState(false)
   const [errorList, setErrorList] = useState([])
+  
   
 
 
@@ -56,7 +58,7 @@ function LogIn({onHandleUserLogIn, setNeedProfile, onHandleNewUser, setLoggedInU
         username: newUser,
         password: newPass,
         password_confirmation: confirmPass,
-        avatar_url: 'https://media.istockphoto.com/photos/businessman-silhouette-as-avatar-or-default-profile-picture-picture-id476085198?b=1&k=20&m=476085198&s=170667a&w=0&h=Ct4e1kIOdCOrEgvsQg4A1qeuQv944pPFORUQcaGw4oI=',
+        avatar_url: newAvatarUrl,
         bio: newBio
       })
     })
@@ -101,10 +103,13 @@ function LogIn({onHandleUserLogIn, setNeedProfile, onHandleNewUser, setLoggedInU
               <input type='password' onChange={(e) => setNewPass(e.target.value)}></input> 
               <p>Confirm Password:</p>
               <input type='password' onChange={(e) => setConfirmPass(e.target.value)}></input>
+              <p>Add a Profile URL:</p>
+              <input type='text' onChange={(e) => setNewAvatarUrl(e.target.value)}></input>
               <p>
                 Tell us something about you!
               </p>
               <textarea className="new-bio" onChange={(e) => setNewBio(e.target.value)} type='text' />
+              
               <p>
                 <button>Sign up!</button>
               </p>

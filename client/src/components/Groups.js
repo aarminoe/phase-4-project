@@ -4,7 +4,7 @@ function Groups({groupList, loggedInUser, onToOtherProfile, onToGroupPage, group
     console.log(groupList)
     return( 
         <div>
-            <p className="messages-header">
+            <p className="group-header">
                 Groups:
             </p>
             {groupList.map((group) => {

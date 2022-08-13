@@ -7,8 +7,7 @@ function GroupMember({user, onToOtherProfile}) {
         
             <div>
                 <img className="avatar-group-member" src={user.avatar_url}></img>
-                <NavLink onClick={() => onToOtherProfile(user)} exact to='/other-user-profile' >{user.username}</NavLink>
-                <p>{user.bio}</p>             
+                <NavLink onClick={() => onToOtherProfile(user)} exact to='/other-user-profile' >{user.username}</NavLink>            
             </div>     
         </div>
     )

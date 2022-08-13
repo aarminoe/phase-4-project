@@ -326,3 +326,19 @@ html, body {
   margin-left: 40px;
   margin-bottom: 0px;
 }
+
+.group-header {
+  font-size: x-large;
+  margin-left: 40px;
+  margin-bottom: 0px;
+}
+
+.group-page-name {
+  font-size: x-large;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.must-be-in-group {
+  margin-top: 20px;
+}

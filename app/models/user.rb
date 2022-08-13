@@ -15,5 +15,7 @@ class User < ApplicationRecord
 
     validates :username, uniqueness: true, presence: true, length: {within: 3..24}
     validates :password, presence: :true, confirmation: true, length: {within: 8..24}
+    validates :avatar_url, presence: :true 
+    validates :bio, presence: :true
 
 end

@@ -80,7 +80,10 @@ function GroupPage({loggedInUser, onToOtherProfile, group}) {
 
     return (
         <p className="single-group">
-            {group.name}
+            <div className="group-page-name">
+                {group.name}
+            </div>
+            
                 {seeGroupMembers ? 
                 <div>
                     <button  onClick={handleSeeGroupUsers}>Hide Members</button>
@@ -94,7 +97,9 @@ function GroupPage({loggedInUser, onToOtherProfile, group}) {
                 })                
                 : null}
             <form onSubmit={handleNewGroupMessage}>
-                Must be in group to add messages!
+                <p className="must-be-in-group">
+                    Must be in group to add messages!
+                </p>
                 <p>
                     <input type='text' onChange={(e) => setNewGroupMessage(e.target.value)} value={newGroupMessage}></input>
                     <button>Send Message</button>
