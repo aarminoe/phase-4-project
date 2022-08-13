@@ -9,6 +9,16 @@ class CommentsController < ApplicationController
         end
     end
 
+    def update
+        comment = Comment.find_by(id:params[:id])
+        if comment 
+            comment.update(comment_params)
+            render json: comment 
+        else
+            render json: { error: 'Comment not found' }, status: :not_found
+        end
+    end
+
     def destroy 
         comment = Comment.find_by(id:params[:id])
         if comment 

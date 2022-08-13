@@ -176,9 +176,31 @@ html, body {
   background-color: rgb(245, 99, 99);
 }
 
+.comment-edit {
+  width: 30px;
+  height: 30px;
+  font-size: small;
+  margin-right:10px;
+  border-radius: 10px;
+  transition: .3s;
+  margin-left: -10px;
+}
+
+.comment-edit:hover {
+  color: white;
+  background-color: black;
+}
+
+.comment-text {
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
 .who-commented {
   margin-top: 5px;
   font-size: large;
+  font-weight: 500;
 }
 
 
@@ -221,7 +243,7 @@ html, body {
 }
 
 .head {
-  background-color: rgb(152, 152, 255);
+  background-color: rgb(75, 162, 250);
   top: auto;
   margin-top: -25px;
   width: 100%;

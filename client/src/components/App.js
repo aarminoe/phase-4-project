@@ -55,7 +55,7 @@ function App() {
   }
 
   function handleNewPost(newPost) {
-    const updatedPostList = [...postList, newPost]
+    const updatedPostList = [...postList.reverse(), newPost]
     setPostList(updatedPostList.reverse())
   }
 

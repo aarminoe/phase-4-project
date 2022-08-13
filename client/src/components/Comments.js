@@ -5,7 +5,7 @@ function Comments({post, loggedInUser}) {
 
     const [addedComment, setAddedComment] = useState('')
     const [seeComments, setSeeComments] = useState(false)
-    const [postComments, setPostComments] = useState(post.comments)
+    const [postComments, setPostComments] = useState([...post.comments].reverse())
 
     function handleAddComment(e) {
         e.preventDefault()
@@ -29,8 +29,8 @@ function Comments({post, loggedInUser}) {
     }
 
     function handleAddNewComment(newComment) {
-        const updatedComments = [...postComments, newComment]
-        setPostComments(updatedComments)
+        const updatedComments = [...postComments.reverse(), newComment]
+        setPostComments(updatedComments.reverse())
     }
 
     function handleDeleteCommentState(deletedComment) {
@@ -38,6 +38,21 @@ function Comments({post, loggedInUser}) {
             return comment !== deletedComment
         })
         setPostComments(updatedComments)
+    }
+
+    function handleEditCommentState(edittedComment) {
+        const updatedComments = postComments.reverse().map((comment) => {
+            if (comment.id === edittedComment.id) {
+                return {
+                    ...comment,
+                    comment: edittedComment.comment
+                }
+            }
+            else {
+                return comment
+            }
+        })
+        setPostComments(updatedComments.reverse())
     }
 
     return (
@@ -50,7 +65,7 @@ function Comments({post, loggedInUser}) {
             </form> 
             : null}
             {seeComments ? postComments.map((comment) => {
-                return <Comment comment={comment} post={post} loggedInUser={loggedInUser} onHandleDeleteCommentState={handleDeleteCommentState}/>
+                return <Comment comment={comment} post={post} loggedInUser={loggedInUser} onHandleDeleteCommentState={handleDeleteCommentState} onHandleEditCommentState={handleEditCommentState}/>
             }): null}
         </div>
     )
