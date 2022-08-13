@@ -275,6 +275,11 @@ html, body {
   
 }
 
+.input-new-group {
+  margin-left: 40px;
+  margin-top: 20px;
+}
+
 .message {
   margin-left: 20px;
   margin-top: 20px;
