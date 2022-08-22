@@ -3,7 +3,7 @@ import FriendsList from "./FriendsList"
 import Post from "./Post"
 
 
-function Profile({loggedInUser, userList,onToOtherProfile, postList, addedFriend}) {
+function Profile({loggedInUser, userList,onToOtherProfile, postList, addedFriend, onHandleEditPost, onHandleDeletePost}) {
 
     const [seeFriends, setSeeFriends] = useState(false)   
 
@@ -30,7 +30,7 @@ function Profile({loggedInUser, userList,onToOtherProfile, postList, addedFriend
                     <div>
                         {postList.map((post) => {
                             if (post.user.username === loggedInUser.username) {
-                                return <Post post={post} loggedInUser={loggedInUser} />
+                                return <Post post={post} loggedInUser={loggedInUser} onHandleEditPost={onHandleEditPost} onHandleDeletePost={onHandleDeletePost}/>
                             }
                         })}
                     </div>

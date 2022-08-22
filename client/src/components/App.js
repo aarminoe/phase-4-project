@@ -147,7 +147,7 @@ function App() {
                   <Home userList={userList} loggedInUser={loggedInUser} onHandleNewPost={handleNewPost} postList={postList} onHandleEditPost={handleEditPostState} onHandleDeletePost={handleDeletePost}/> 
                 </Route>
                 <Route exact path='/profile'>
-                  <Profile loggedInUser={loggedInUser} userList={userList} onToOtherProfile={toOtherProfile} postList={postList} addedFriend={addedFriend}/>
+                  <Profile loggedInUser={loggedInUser} userList={userList} onToOtherProfile={toOtherProfile} postList={postList} addedFriend={addedFriend} onHandleEditPost={handleEditPostState} onHandleDeletePost={handleDeletePost}/>
                 </Route>
                 <Route exact path='/messages'>
                   <Conversation userList={userList} loggedInUser={loggedInUser} newMessageNewConversation={newMessageNewConversation} newMessageHasConversation={newMessageHasConversation}/>
