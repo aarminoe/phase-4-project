@@ -27,7 +27,7 @@ function Groups({groupList, loggedInUser, onToOtherProfile, onToGroupPage, group
     return( 
         <div>
             <p className="group-header">
-                Groups:
+                Cliques:
             </p>
             <form onSubmit={handleNewGroup}>
                 <input className="input-new-group" onChange={(e) => setNewGroupName(e.target.value)} type='text' value={newGroupName} ></input>

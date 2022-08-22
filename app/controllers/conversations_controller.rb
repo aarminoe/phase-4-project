@@ -9,6 +9,12 @@ class ConversationsController < ApplicationController
         end
     end
 
+    def index 
+        conversation = Conversation.all 
+        render json: conversation 
+    end
+
+
     private 
 
     def conversation_params 

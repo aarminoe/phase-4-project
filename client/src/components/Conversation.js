@@ -1,9 +1,11 @@
 import Messages from "./Messages"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 function Conversation({loggedInUser, userList, newMessageNewConversation}) {
 
     const [userConversations, setUserConversations] = useState(loggedInUser.conversations)
+
+
 
     return(
         <div>
@@ -11,7 +13,7 @@ function Conversation({loggedInUser, userList, newMessageNewConversation}) {
                 Conversations:
             </p>  
             {loggedInUser.conversations.map((conversation) => {
-                return <Messages conversation={conversation} loggedInUser={loggedInUser} userList={userList} />
+                return <Messages conversation={conversation} conversationmessages={conversation.messages}loggedInUser={loggedInUser} userList={userList} />
             })}
         </div>
     )

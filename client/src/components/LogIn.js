@@ -67,7 +67,6 @@ function LogIn({onHandleUserLogIn, setNeedProfile, onHandleNewUser, setLoggedInU
         r.json().then((createdUser) => { 
           onHandleNewUser(createdUser)
           setLoggedInUser(createdUser)
-          setNeedProfile(true)
           console.log(createdUser.errors)})
           setSignUp(false)
       } else {

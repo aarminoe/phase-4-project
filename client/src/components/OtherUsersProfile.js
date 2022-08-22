@@ -109,7 +109,7 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser
     return (
         <div>
             <p className="messages-header">
-                {friendData.username}
+                {friendData ? friendData.username : null}
             </p>
             {friendData ? <img className='profile-avatar' src={friendData.avatar_url}></img> : null}
             <div>

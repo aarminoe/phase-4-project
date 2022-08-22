@@ -1,16 +1,16 @@
 import Message from "./Message"
 import React, { useState } from "react"
 
-function Messages({loggedInUser, conversation, userList, newMessageNewConversation}) {
+function Messages({loggedInUser, conversation, userList, conversationmessages}) {
 
-    console.log(conversation)
+    console.log(conversationmessages)
 
     const [replyMessage, setReplyMessage] = useState('')
     const [userToReplyTo, setUserToReplyTo] = useState(null)
     const [sentConversationData, setSentConversationData] = useState(null)
     const [conversationMessages, setConversationMessages] = useState(conversation.messages)
 
-
+    console.log(conversation)
 
     function handleReplyMessage(e) {
         setReplyMessage(e.target.value)
@@ -83,15 +83,17 @@ function Messages({loggedInUser, conversation, userList, newMessageNewConversati
     
 
     return(
-        <div className="conversation">
-            {conversationMessages.map((message) => {
+        <div className="conversation"> 
+            {conversationMessages ? conversationMessages.map((message) => {
+                return <Message message={message} loggedInUser={loggedInUser} userList={userList} conversation={conversation} onHandleDeleteMessage={handleDeleteMessage}/>
+            }) : loggedInUser.messages.map((message) => {
                 return <Message message={message} loggedInUser={loggedInUser} userList={userList} conversation={conversation} onHandleDeleteMessage={handleDeleteMessage}/>
             })}
-            {conversationMessages[0] ? 
+             
             <form onSubmit={handleReplyMessageSend}>
                 <input className="reply-input" type='text' placeholder='Reply...' value={replyMessage} onChange={handleReplyMessage}></input>
                 <button>send</button>
-            </form> : null}
+            </form>
         </div>
     )
 }

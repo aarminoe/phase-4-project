@@ -3,7 +3,7 @@ import React, { useState } from "react"
 
 function Message({message, loggedInUser, userList, conversation, onHandleDeleteMessage}) {
     console.log(message)
-    console.log(userList)
+    
     
 
     function handleDeleteMessage() {
