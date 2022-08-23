@@ -9,8 +9,7 @@ function Post({post, loggedInUser, onHandleEditPost, onHandleDeletePost}) {
     const [postLiked, setPostLiked] = useState(false)
     const [currentPostLikes, setCurrentPostLikes] = useState(post.post_likes)
 
-    console.log(loggedInUser)
-    console.log(post)
+
 
     function handleLike() {
         let userFound = false

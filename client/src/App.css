@@ -311,6 +311,7 @@ html, body {
   border-style: groove;
   margin-left: 40px;
   margin-top: 40px;
+  margin-bottom: 100px;
 }
 
 .search {
@@ -357,7 +358,7 @@ html, body {
 .group-header {
   font-size: x-large;
   margin-left: 40px;
-  margin-bottom: 0px;
+  margin-bottom: px;
 }
 
 .group-page-name {

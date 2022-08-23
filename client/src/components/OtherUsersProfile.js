@@ -105,7 +105,7 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser
         })
         
     }
-
+    console.log(friendData)
     return (
         <div>
             <p className="messages-header">
@@ -129,7 +129,7 @@ function OtherUsersProfile({friendData, userList, onToOtherProfile, loggedInUser
                     </div>
                 </div>
                 <button className="see-friends" onClick={handleOtherProfileFriends} >See Friends of {friendData ? friendData.username : null}</button>
-                {seeFriends ? <FriendsList  clickedUserData={clickedUserData} userList={userList} onToOtherProfile={onToOtherProfile} setSeeFriends={setSeeFriends} seeFriends={seeFriends} loggedInUser={loggedInUser}/> : null}
+                {seeFriends ? <FriendsList  clickedUserData={clickedUserData} userList={userList} onToOtherProfile={onToOtherProfile} setSeeFriends={setSeeFriends} seeFriends={seeFriends} loggedInUser={loggedInUser} friendData={friendData}/> : null}
                 <div className="posts-from">
                     {friendData ? `Posts from ${friendData.username}` : null}
                     <div>

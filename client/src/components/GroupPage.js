@@ -97,7 +97,6 @@ function GroupPage({loggedInUser, onToOtherProfile, group}) {
                 : null}
             <form onSubmit={handleNewGroupMessage}>
                 <p className="must-be-in-group">
-                    Must be in group to add messages!
                 </p>
                 <p>
                     <input type='text' onChange={(e) => setNewGroupMessage(e.target.value)} value={newGroupMessage}></input>

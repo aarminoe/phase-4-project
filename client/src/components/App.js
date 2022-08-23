@@ -69,11 +69,6 @@ function App() {
     setNewFriend(newFriendAdded)
   }
 
-  function handleNewMessageState(newMessage) {
-    console.log(newMessage)
-    setNewMessageNewConversation(newMessage)
-    console.log(loggedInUser)
-  }
 
   function handleNewMessageInConversation(newMessage) {
     console.log(newMessage)
@@ -130,7 +125,6 @@ function App() {
     .then(posts => setPostList(posts.reverse()))
   },[])
 
-  console.log(loggedInUser)
 
   if (loggedInUser) {
     if (loggedInUser.avatar_url) {
@@ -162,7 +156,7 @@ function App() {
                   <FriendsList userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}/>
                 </Route>
                 <Route exact path='/other-user-profile'>
-                  <OtherUsersProfile userList={userList} loggedInUser={loggedInUser} friendData={friendData} onToOtherProfile={toOtherProfile} postList={postList} onHandleNewMessageState={handleNewMessageState} onHandleNewMessageInConversation={handleNewMessageInConversation} hasConversationWith={hasConversationWith} onHandleAddFriend={handleAddFriend} addedFriend={addedFriend} />
+                  <OtherUsersProfile userList={userList} loggedInUser={loggedInUser} friendData={friendData} onToOtherProfile={toOtherProfile} postList={postList} onHandleNewMessageInConversation={handleNewMessageInConversation} hasConversationWith={hasConversationWith} onHandleAddFriend={handleAddFriend} addedFriend={addedFriend} />
                 </Route>
                 <Route exact path='/group-page'>
                   <GroupPage userList={userList} loggedInUser={loggedInUser} onToOtherProfile={toOtherProfile}  />

@@ -1,11 +1,7 @@
 import Messages from "./Messages"
-import React, { useState, useEffect } from "react"
+import React from "react"
 
-function Conversation({loggedInUser, userList, newMessageNewConversation}) {
-
-    const [userConversations, setUserConversations] = useState(loggedInUser.conversations)
-
-
+function Conversation({loggedInUser, userList}) {
 
     return(
         <div>
