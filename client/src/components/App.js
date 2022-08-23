@@ -92,8 +92,8 @@ function App() {
 
   function handleNewGroup (newGroup) {
     console.log(newGroup)
-    const updatedGroupList = [...groupList, newGroup]
-    setGroupList(updatedGroupList)
+    const updatedGroupList = [...groupList.reverse(), newGroup]
+    setGroupList(updatedGroupList.reverse())
   }
   
 
@@ -116,7 +116,7 @@ function App() {
   useEffect(() => {
     fetch('/groups')
     .then(resp => resp.json())
-    .then(groups => setGroupList(groups))
+    .then(groups => setGroupList(groups.reverse()))
   },[])
 
   useEffect(() => {
