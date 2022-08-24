@@ -125,7 +125,7 @@ function App() {
     .then(posts => setPostList(posts.reverse()))
   },[])
 
-
+  console.log(loggedInUser)
   if (loggedInUser) {
     if (loggedInUser.avatar_url) {
       return (

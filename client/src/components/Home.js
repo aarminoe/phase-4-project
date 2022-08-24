@@ -26,11 +26,18 @@ function Home({loggedInUser, onHandleNewPost, postList, onHandleEditPost, onHand
         })
     }
 
+    function showGroups() {
+        fetch('/ordergroups')
+        .then(resp => resp.json())
+        .then(data => console.log(data))
+    }
+
     console.log(postList)
     return(
         <div>
             <div>
                 <div className="home-add-post">
+                    <button onClick={showGroups}>log groups</button>
                     <form onSubmit={addNewPost}>
                         <input type='text' placeholder="Whats on your mind?" value={postText} onChange={(e) => {setPostText(e.target.value)}}></input>
                         <button>Add Post</button>
